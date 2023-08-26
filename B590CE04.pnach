@@ -41,3 +41,32 @@ patch=1,EE,20351Cb8,extended,41eb3334
 
 // 1337 X Power
 //patch=1,EE,20351Cb8,extended,464cba67
+
+//Rubberband this can make the beginner league a little less boring as the AI won't slow down as soon as the player is behind them, or if you want to win Like The Wind in a Mini Cooper you can set the rubberband value to 0.1
+// Setting it too high can make the AI glitchy
+// Replace the value after the last comma(patch=1,EE,21FC5FD0,extended,[3f800000] <-- This value)
+//3dcccccd = 0.1(10% speed)
+//3e800000 = 0.25(25% speed)
+//3f000000 = 0.5(50% speed)
+//3f400000 = 0.75(75% speed)
+//3f800000 = 1.0(no rubberband)
+//3f8ccccd = 1.1(110% speed)
+//3fa00000 = 1.25(125% speed)
+//3fc00000 = 1.5(150% speed)
+//3fe00000 = 1.75(175 speed)
+//40000000 = 2.0(double speed)
+
+//Ai Car 1 rubberband 
+patch=1,EE,21FC0460,extended,3f800000
+
+//Ai Car 2 rubberband 
+patch=1,EE,21FC1B3C,extended,3f800000
+
+//Ai Car 3 rubberband 
+patch=1,EE,21FC5FD0,extended,3f800000
+
+//Ai Car 4 rubberband 
+patch=1,EE,21FC3218,extended,3f800000
+
+//Ai Car 5 rubberband 
+patch=1,EE,21FC48F4,extended,3f800000
