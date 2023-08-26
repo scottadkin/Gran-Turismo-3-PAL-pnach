@@ -1,0 +1,43 @@
+gametitle=Gran Turismo 3 [SCES_502.94;1]PAL [B590CE04] 
+
+//9999999Money
+patch=1,EE,209539F8,extended,0098967F
+
+// Normal Power 
+//patch=1,EE,20351Cb8,extended,411ccccd
+
+// 2 X Power
+//patch=1,EE,20351Cb8,extended,419ccccd
+
+// 3 X Power
+patch=1,EE,20351Cb8,extended,41eb3334
+
+// 4 X Power
+//patch=1,EE,20351Cb8,extended,421ccccd
+
+// 5 X Power
+//patch=1,EE,20351Cb8,extended,42440000
+
+// 6 X Power
+//patch=1,EE,20351Cb8,extended,426b3334
+
+// 7 X Power
+//patch=1,EE,20351Cb8,extended,42893333
+
+// 8 X Power
+//patch=1,EE,20351Cb8,extended,429ccccd
+
+// 9 X Power
+//patch=1,EE,20351Cb8,extended,42b06667
+
+// 10 X Power
+//patch=1,EE,20351Cb8,extended,42c40000
+
+// 69 X Power
+//patch=1,EE,20351Cb8,extended,44290ccd
+
+// 420 X Power
+//patch=1,EE,20351Cb8,extended,4580a000
+
+// 1337 X Power
+//patch=1,EE,20351Cb8,extended,464cba67
