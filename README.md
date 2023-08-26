@@ -16,3 +16,5 @@
 - 69 x Global Car Power 
 - 420 x Global Car Power 
 - 1337 x Global Car Power 
+- Force AI Rubberband value for each car(in easier events this stops the AI slowing down once they are in front of you).
+- Force AI Max throttle value for each car(in easier events the AI won't use max throttle, this prevents that)
