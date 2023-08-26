@@ -70,3 +70,16 @@ patch=1,EE,21FC3218,extended,3f800000
 
 //Ai Car 5 rubberband 
 patch=1,EE,21FC48F4,extended,3f800000
+
+//AI Max Throttle, Beginner and Amateur events the AI won't use 100% throttle in many events making them slower.
+
+//AI CAR 1 Max Throttle
+patch=1,EE,21FC438C,extended,3f800000
+//AI CAR 2 Max Throttle
+patch=1,EE,21FBFEF8,extended,3f800000
+//AI CAR 3 Max Throttle
+patch=1,EE,21FC15D4,extended,3f800000
+//AI CAR 4 Max Throttle
+patch=1,EE,21FC2CB0,extended,3f800000
+//AI CAR 5 Max Throttle
+patch=1,EE,21FC5A68,extended,3f800000
