@@ -69,23 +69,33 @@ const CASH_VALUES = [
 ];
 
 const AI_RUBBERBAND_VALUES = [];
+const AI_MAX_THROTTLE_VALUES = [];
 
 for(const [displayValue, value] of Object.entries(FLOAT_VALUES)){
 
+    const display = `${displayValue} - (${(displayValue * 100).toFixed(2)}%)`;
+
     AI_RUBBERBAND_VALUES.push({
-        "displayValue": `${displayValue} - (${(displayValue * 100).toFixed(2)}%)` , "value": value
+        "displayValue": display , "value": value
+    });
+
+    AI_MAX_THROTTLE_VALUES.push({
+        "displayValue": display, "value": value
     });
     
 }
 
-AI_RUBBERBAND_VALUES.sort((a, b) =>{
+function sortByDisplayValue(a, b){
     a = a.displayValue;
     b = b.displayValue;
 
     if(a < b) return -1;
     if(a > b) return 1;
     return 0;
-});
+}
+
+AI_RUBBERBAND_VALUES.sort(sortByDisplayValue);
+AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 
 const ADDRESSES = {
     "cash": {"displayValue": "Money", "address": "0098967F", "selected": null},
@@ -95,6 +105,11 @@ const ADDRESSES = {
     "aiRubberband3": {"displayValue": "AI Rubberband #3", "address": "21FC5FD0", "selected": null},
     "aiRubberband4": {"displayValue": "AI Rubberband #4", "address": "21FC3218", "selected": null},
     "aiRubberband5": {"displayValue": "AI Rubberband #5", "address": "21FC48F4", "selected": null},
+    "aiMaxThrottle1": {"displayValue": "AI MAX Throttle #1", "address": "21FC438C", "selected": null},
+    "aiMaxThrottle2": {"displayValue": "AI MAX Throttle #2", "address": "21FBFEF8", "selected": null},
+    "aiMaxThrottle3": {"displayValue": "AI MAX Throttle #3", "address": "21FC15D4", "selected": null},
+    "aiMaxThrottle4": {"displayValue": "AI MAX Throttle #4", "address": "21FC2CB0", "selected": null},
+    "aiMaxThrottle5": {"displayValue": "AI MAX Throttle #5", "address": "21FC5A68", "selected": null},
 };
 
 
@@ -154,7 +169,23 @@ function setOutput(){
             const v = ADDRESSES[key];
         
             string += writeCheat(
-                `AI Rubberband : ${v.selected.displayValue}`, 
+                `AI Rubberband #${i}: ${v.selected.displayValue}`, 
+                ADDRESSES[key].address,
+                v.selected.value
+            );
+        }
+    }
+
+    for(let i = 1; i < 6; i++){
+
+        const key = `aiMaxThrottle${i}`;
+
+        if(ADDRESSES[key].selected !== null){
+
+            const v = ADDRESSES[key];
+        
+            string += writeCheat(
+                `AI Max Throttle #${i}: ${v.selected.displayValue}`, 
                 ADDRESSES[key].address,
                 v.selected.value
             );
@@ -197,11 +228,18 @@ function setDropDown(id, options, selectedCheatsKey){
 
     setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
     setDropDown("#cash", CASH_VALUES, "cash");
+
     setDropDown("#rb-1", AI_RUBBERBAND_VALUES, "aiRubberband1");
     setDropDown("#rb-2", AI_RUBBERBAND_VALUES, "aiRubberband2");
     setDropDown("#rb-3", AI_RUBBERBAND_VALUES, "aiRubberband3");
     setDropDown("#rb-4", AI_RUBBERBAND_VALUES, "aiRubberband4");
     setDropDown("#rb-5", AI_RUBBERBAND_VALUES, "aiRubberband5");
+
+    setDropDown("#mf-1", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle1");
+    setDropDown("#mf-2", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle2");
+    setDropDown("#mf-3", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle3");
+    setDropDown("#mf-4", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle4");
+    setDropDown("#mf-5", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle5");
 
     setOutput();
 
