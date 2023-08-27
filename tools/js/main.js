@@ -68,9 +68,33 @@ const CASH_VALUES = [
     {"displayValue": "9,999,999", "value": "0098967F"}
 ];
 
+const AI_RUBBERBAND_VALUES = [];
+
+for(const [displayValue, value] of Object.entries(FLOAT_VALUES)){
+
+    AI_RUBBERBAND_VALUES.push({
+        "displayValue": `${displayValue} - (${(displayValue * 100).toFixed(2)}%)` , "value": value
+    });
+    
+}
+
+AI_RUBBERBAND_VALUES.sort((a, b) =>{
+    a = a.displayValue;
+    b = b.displayValue;
+
+    if(a < b) return -1;
+    if(a > b) return 1;
+    return 0;
+});
+
 const ADDRESSES = {
     "cash": {"displayValue": "Money", "address": "0098967F", "selected": null},
-    "globalPower": {"displayValue": "Global Power Multiplier", "address": "20351Cb8", "selected": null},
+    "power": {"displayValue": "Global Power Multiplier", "address": "20351Cb8", "selected": null},
+    "aiRubberband1": {"displayValue": "AI Rubberband #1", "address": "21FC0460", "selected": null},
+    "aiRubberband2": {"displayValue": "AI Rubberband #2", "address": "21FC1B3C", "selected": null},
+    "aiRubberband3": {"displayValue": "AI Rubberband #3", "address": "21FC5FD0", "selected": null},
+    "aiRubberband4": {"displayValue": "AI Rubberband #4", "address": "21FC3218", "selected": null},
+    "aiRubberband5": {"displayValue": "AI Rubberband #5", "address": "21FC48F4", "selected": null},
 };
 
 
@@ -83,13 +107,6 @@ function writeCheat(description, address, value){
 }
 
 
-const _selectedCheats = {
-    "power": null,
-    "cash": null
-};
-
-console.log(FLOAT_VALUES);
-
 function createOption(elem, displayValue, value){
 
     const option = document.createElement("option");
@@ -100,81 +117,60 @@ function createOption(elem, displayValue, value){
 
 const DEFAULT_OUTPUT = `gametitle=Gran Turismo 3 [SCES_502.94;1]PAL [B590CE04]\n\n`;
 
-function setOutput(displayValue, value){
-
-    console.log(arguments);
+function setOutput(){
 
     const elem = document.querySelector("#output");
 
-
     let string = DEFAULT_OUTPUT;
 
+    if(ADDRESSES.power.selected !== null){
 
-    if(_selectedCheats.power !== null){
-
-        const v = _selectedCheats.power;
+        const v = ADDRESSES.power;
 
         string += writeCheat(
-            `Global Car Power Multiplier: ${v.displayValue}`, 
-            ADDRESSES.globalPower.address,
-            v.value
+            `Global Car Power Multiplier: ${v.selected.displayValue}`, 
+            v.address,
+            v.selected.value
         );
     }
 
-    if(_selectedCheats.cash !== null){
+    if(ADDRESSES.cash.selected !== null){
 
-        const v = _selectedCheats.cash;
+        const v = ADDRESSES.cash;
         
         string += writeCheat(
-            `Career CASH: ${v.displayValue}`, 
-            ADDRESSES.cash.address,
-            v.value
+            `Career CASH: ${v.selected.displayValue}`, 
+            v.address,
+            v.selected.value
         );
+    }
+
+    for(let i = 1; i < 6; i++){
+
+        const key = `aiRubberband${i}`;
+
+        if(ADDRESSES[key].selected !== null){
+
+            const v = ADDRESSES[key];
+        
+            string += writeCheat(
+                `AI Rubberband : ${v.selected.displayValue}`, 
+                ADDRESSES[key].address,
+                v.selected.value
+            );
+        }
     }
 
     elem.innerHTML = string.replaceAll("\n","<br/>");
 }
 
-function setPowerDropDown(){
+function setDropDown(id, options, selectedCheatsKey){
 
-    const elem = document.querySelector("#power-multiplier");
+    const elem = document.querySelector(id);
 
-    for(let i = 0; i < POWER_MULTIPLIERS.length; i++){
+    for(let i = 0; i < options.length; i++){
 
-        const {displayValue, value} = POWER_MULTIPLIERS[i];
-
-        createOption(elem, displayValue, value);
-    }
-
-    elem.addEventListener("change", (e) =>{
-
-        const selectedIndex = e.target.selectedIndex - 1;
-
-        console.log(selectedIndex);
-
-        if(selectedIndex < 0){
-            _selectedCheats.power = null;      
-        }else{
-
-            _selectedCheats.power = {
-                "displayValue": POWER_MULTIPLIERS[selectedIndex].displayValue, 
-                "value": e.target.value
-            };
-
-        }
-
-        setOutput();
-    }); 
-}
-
-
-function setCashDropDown(){
-
-    const elem = document.querySelector("#cash");
-
-    for(let i = 0; i < CASH_VALUES.length; i++){
-
-        const {displayValue, value} = CASH_VALUES[i];
+        const {displayValue, value} = options[i];
 
         createOption(elem, displayValue, value);
     }
@@ -183,31 +179,30 @@ function setCashDropDown(){
 
         const selectedIndex = e.target.selectedIndex - 1;
 
-        console.log(selectedIndex);
-
         if(selectedIndex < 0){
-            _selectedCheats.cash = null;      
+            ADDRESSES[selectedCheatsKey].selected = null;      
         }else{
 
-            _selectedCheats.cash = {
-                "displayValue": CASH_VALUES[selectedIndex].displayValue, 
+            ADDRESSES[selectedCheatsKey].selected = {
+                "displayValue": options[selectedIndex].displayValue, 
                 "value": e.target.value
             };
 
         }
-
         setOutput();
     }); 
 }
-
-
-//TODO: create a generic function for setting dropdowns and their events
-
 
 (() =>{
 
-    setPowerDropDown();
-    setCashDropDown();
+    setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
+    setDropDown("#cash", CASH_VALUES, "cash");
+    setDropDown("#rb-1", AI_RUBBERBAND_VALUES, "aiRubberband1");
+    setDropDown("#rb-2", AI_RUBBERBAND_VALUES, "aiRubberband2");
+    setDropDown("#rb-3", AI_RUBBERBAND_VALUES, "aiRubberband3");
+    setDropDown("#rb-4", AI_RUBBERBAND_VALUES, "aiRubberband4");
+    setDropDown("#rb-5", AI_RUBBERBAND_VALUES, "aiRubberband5");
+
     setOutput();
 
 })();
