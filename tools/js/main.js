@@ -68,6 +68,31 @@ const CASH_VALUES = [
     {"displayValue": "9,999,999", "value": "0098967F"}
 ];
 
+const DRAG_VALUES = [//be4ccccd
+    {"displayValue": "10 Times Negative", "value": "bf800000"},
+    {"displayValue": "Quad Negative", "value": "becccccd"},
+    {"displayValue": "Double Negative", "value": "be4ccccd"},
+    {"displayValue": "Negative", "value": "bdcccccd"},
+    {"displayValue": "None", "value": "00000000"},
+    {"displayValue": "Normal", "value": "3dcccccd"},
+    {"displayValue": "Double", "value": "3e4ccccd"},
+    {"displayValue": "Quad", "value": "3ecccccd"},
+    {"displayValue": "10 Times", "value": "3f800000"},
+];
+
+const gearDefault = 0.001000000047;
+
+const GEAR_VALUES = [//be4ccccd
+    {"displayValue": `Default`, "value": "3a83126f"},
+    {"displayValue": `90%`, "value": "3a6bedfb"},
+    {"displayValue": `80%`, "value": "3a51b718"},
+    {"displayValue": `70%`, "value": "3a378035"},
+    {"displayValue": `60%`, "value": "3a1d4952"},
+    {"displayValue": "50%", "value": "3a03126f"},
+    {"displayValue": "25%", "value": "3983126f"},
+    {"displayValue": "10%", "value": "38d1b717"},
+];
+
 const AI_RUBBERBAND_VALUES = [];
 const AI_MAX_THROTTLE_VALUES = [];
 
@@ -98,8 +123,15 @@ AI_RUBBERBAND_VALUES.sort(sortByDisplayValue);
 AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 
 const ADDRESSES = {
-    "cash": {"displayValue": "Money", "address": "0098967F", "selected": null},
+    "cash": {"displayValue": "Money", "address": "209539F8", "selected": null},
     "power": {"displayValue": "Global Power Multiplier", "address": "20351Cb8", "selected": null},
+
+    //default value 0.1000000015
+    "drag": {"displayValue": "Global Drag", "address": "20351B70", "selected": null},
+    //default value 0.001000000047
+    "gearScale": {"displayValue": "Global Gear Scale", "address": "20351d0c", "selected": null},
+    //default value 9.800000191
+    "gravity": {"displayValue": "Gravity", "address": "20351ED4", "selected": null},
     "aiRubberband1": {"displayValue": "AI Rubberband #1", "address": "21FC0460", "selected": null},
     "aiRubberband2": {"displayValue": "AI Rubberband #2", "address": "21FC1B3C", "selected": null},
     "aiRubberband3": {"displayValue": "AI Rubberband #3", "address": "21FC5FD0", "selected": null},
@@ -144,6 +176,28 @@ function setOutput(){
 
         string += writeCheat(
             `Global Car Power Multiplier: ${v.selected.displayValue}`, 
+            v.address,
+            v.selected.value
+        );
+    }
+
+    if(ADDRESSES.drag.selected !== null){
+
+        const v = ADDRESSES.drag;
+
+        string += writeCheat(
+            `Drag Multiplier: ${v.selected.displayValue}`, 
+            v.address,
+            v.selected.value
+        );
+    }
+
+    if(ADDRESSES.gearScale.selected !== null){
+
+        const v = ADDRESSES.gearScale;
+
+        string += writeCheat(
+            `Gear Scale Multiplier: ${v.selected.displayValue}`, 
             v.address,
             v.selected.value
         );
@@ -228,6 +282,8 @@ function setDropDown(id, options, selectedCheatsKey){
 
     setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
     setDropDown("#cash", CASH_VALUES, "cash");
+    setDropDown("#global-drag", DRAG_VALUES, "drag");
+    setDropDown("#gear-ratio", GEAR_VALUES, "gearScale");
 
     setDropDown("#rb-1", AI_RUBBERBAND_VALUES, "aiRubberband1");
     setDropDown("#rb-2", AI_RUBBERBAND_VALUES, "aiRubberband2");
