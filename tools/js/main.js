@@ -101,6 +101,13 @@ const TYRE_WEAR_SCALE_VALUES = [
     {"displayValue": "1% Scale", "value": "496f4200"},
 ];
 
+const GRAVITY_VALES = [
+    {"displayValue": "Earth", "value": "411ce979"},
+    {"displayValue": "Sun", "value": "43890000"},
+    {"displayValue": "Moon", "value": "3fcf5c29"},
+    {"displayValue": "Jupiter", "value": "41c651ec"},
+];
+
 const AI_RUBBERBAND_VALUES = [];
 const AI_MAX_THROTTLE_VALUES = [];
 
@@ -266,6 +273,17 @@ function setOutput(){
         );
     }
 
+    if(ADDRESSES.gravity.selected !== null){
+
+        const v = ADDRESSES.gravity;
+        
+        string += writeCheat(
+            `Gravity: ${v.selected.displayValue}`, 
+            v.address,
+            v.selected.value
+        );
+    }
+
     elem.innerHTML = string.replaceAll("\n","<br/>");
 }
 
@@ -301,6 +319,7 @@ function setDropDown(id, options, selectedCheatsKey){
 (() =>{
 
     setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
+    setDropDown("#gravity", GRAVITY_VALES, "gravity");
     setDropDown("#cash", CASH_VALUES, "cash");
     setDropDown("#global-drag", DRAG_VALUES, "drag");
     setDropDown("#gear-ratio", GEAR_VALUES, "gearScale");
