@@ -93,6 +93,14 @@ const GEAR_VALUES = [//be4ccccd
     {"displayValue": "10%", "value": "38d1b717"},
 ];
 
+const TYRE_WEAR_SCALE_VALUES = [
+    {"displayValue": "10000% Scale", "value": "42c40000"},
+    {"displayValue": "1000% Scale", "value": "44750000"},
+    {"displayValue": "Default", "value": "46192000"},//value might be wrong(hex i mean)
+    {"displayValue": "10% Scale", "value": "47bf6800"},
+    {"displayValue": "1% Scale", "value": "496f4200"},
+];
+
 const AI_RUBBERBAND_VALUES = [];
 const AI_MAX_THROTTLE_VALUES = [];
 
@@ -125,7 +133,8 @@ AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 const ADDRESSES = {
     "cash": {"displayValue": "Money", "address": "209539F8", "selected": null},
     "power": {"displayValue": "Global Power Multiplier", "address": "20351Cb8", "selected": null},
-
+    //9800 default value
+    "tyreWear": {"displayValue": "Global Tyre Wear Multiplier", "address": "20351B5c", "selected": null},
     //default value 0.1000000015
     "drag": {"displayValue": "Global Drag", "address": "20351B70", "selected": null},
     //default value 0.001000000047
@@ -246,6 +255,17 @@ function setOutput(){
         }
     }
 
+    if(ADDRESSES.tyreWear.selected !== null){
+
+        const v = ADDRESSES.tyreWear;
+        
+        string += writeCheat(
+            `Tyre Wear Scale: ${v.selected.displayValue}`, 
+            v.address,
+            v.selected.value
+        );
+    }
+
     elem.innerHTML = string.replaceAll("\n","<br/>");
 }
 
@@ -284,6 +304,7 @@ function setDropDown(id, options, selectedCheatsKey){
     setDropDown("#cash", CASH_VALUES, "cash");
     setDropDown("#global-drag", DRAG_VALUES, "drag");
     setDropDown("#gear-ratio", GEAR_VALUES, "gearScale");
+    setDropDown("#tyre-wear-scale", TYRE_WEAR_SCALE_VALUES, "tyreWear");
 
     setDropDown("#rb-1", AI_RUBBERBAND_VALUES, "aiRubberband1");
     setDropDown("#rb-2", AI_RUBBERBAND_VALUES, "aiRubberband2");
