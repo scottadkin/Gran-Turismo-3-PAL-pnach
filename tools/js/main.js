@@ -140,7 +140,7 @@ AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 const ADDRESSES = {
     //PAL 209539F8 NTSC //20958EF8
     "cash": {"displayValue": "Money", "address": "209539F8", "selected": null},
-    // PAL 20351Cb8 // NTSC 20350324
+    // PAL 20351Cb8  9.800000191 // NTSC 2035032C // 
     "power": {"displayValue": "Global Power Multiplier", "address": "20351Cb8", "selected": null},
     //9800 default value // PAL 20351B5c NTSC 203501D0 // offset 6540
     "tyreWear": {"displayValue": "Global Tyre Wear Multiplier", "address": "20351B5c", "selected": null},
