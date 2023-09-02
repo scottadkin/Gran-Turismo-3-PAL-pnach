@@ -138,25 +138,40 @@ AI_RUBBERBAND_VALUES.sort(sortByDisplayValue);
 AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 
 const ADDRESSES = {
+    //PAL 209539F8 NTSC //20958EF8
     "cash": {"displayValue": "Money", "address": "209539F8", "selected": null},
+    // PAL 20351Cb8 // NTSC 20350324
     "power": {"displayValue": "Global Power Multiplier", "address": "20351Cb8", "selected": null},
-    //9800 default value
+    //9800 default value // PAL 20351B5c NTSC 203501D0 // offset 6540
     "tyreWear": {"displayValue": "Global Tyre Wear Multiplier", "address": "20351B5c", "selected": null},
     //default value 0.1000000015
     "drag": {"displayValue": "Global Drag", "address": "20351B70", "selected": null},
-    //default value 0.001000000047
+    //default value 0.001000000047 // PAL 20351d0c // NTSC 20350380
     "gearScale": {"displayValue": "Global Gear Scale", "address": "20351d0c", "selected": null},
-    //default value 9.800000191
+    //default value 9.800000191, PAL 20351ED4 NTSC 20350544 //offset of 6544
     "gravity": {"displayValue": "Gravity", "address": "20351ED4", "selected": null},
+
+    //PAL 21FC0460 //NTSC 21FC0460
     "aiRubberband1": {"displayValue": "AI Rubberband #1", "address": "21FC0460", "selected": null},
+    //PAL 21FC1B3C //NTSC 21FC1B3C
     "aiRubberband2": {"displayValue": "AI Rubberband #2", "address": "21FC1B3C", "selected": null},
-    "aiRubberband3": {"displayValue": "AI Rubberband #3", "address": "21FC5FD0", "selected": null},
-    "aiRubberband4": {"displayValue": "AI Rubberband #4", "address": "21FC3218", "selected": null},
-    "aiRubberband5": {"displayValue": "AI Rubberband #5", "address": "21FC48F4", "selected": null},
-    "aiMaxThrottle1": {"displayValue": "AI MAX Throttle #1", "address": "21FC438C", "selected": null},
-    "aiMaxThrottle2": {"displayValue": "AI MAX Throttle #2", "address": "21FBFEF8", "selected": null},
-    "aiMaxThrottle3": {"displayValue": "AI MAX Throttle #3", "address": "21FC15D4", "selected": null},
-    "aiMaxThrottle4": {"displayValue": "AI MAX Throttle #4", "address": "21FC2CB0", "selected": null},
+    //PAL 21FC3218 //NTSC 21FC48F4
+    "aiRubberband3": {"displayValue": "AI Rubberband #3", "address": "21FC3218", "selected": null},
+    //PAL 21FC48F4 //NTSC 21FC5FD0
+    "aiRubberband4": {"displayValue": "AI Rubberband #4", "address": "21FC48F4", "selected": null},
+    //PAL 21FC5FD0 //NTSC 21FC3218
+    "aiRubberband5": {"displayValue": "AI Rubberband #5", "address": "21FC5FD0", "selected": null},
+    
+    
+    //PAL 21FBFEF8  //NTSC 21FC15D4
+    "aiMaxThrottle1": {"displayValue": "AI MAX Throttle #1", "address": "21FBFEF8", "selected": null},
+    //PAL 21FC15D4  //NTSC 21FC2CB0
+    "aiMaxThrottle2": {"displayValue": "AI MAX Throttle #2", "address": "21FC15D4", "selected": null},
+    //PAL 21FC2CB0  //NTSC 21FC438C
+    "aiMaxThrottle3": {"displayValue": "AI MAX Throttle #3", "address": "21FC2CB0", "selected": null},
+    //PAL 21FC438C  //NTSC 21FBFEF8
+    "aiMaxThrottle4": {"displayValue": "AI MAX Throttle #4", "address": "21FC438C", "selected": null}, 
+    //PAL 21FC5A68  //NTSC 21FC5A68
     "aiMaxThrottle5": {"displayValue": "AI MAX Throttle #5", "address": "21FC5A68", "selected": null},
 };
 
@@ -179,6 +194,7 @@ function createOption(elem, displayValue, value){
 }
 
 const DEFAULT_OUTPUT = `gametitle=Gran Turismo 3 [SCES_502.94;1]PAL [B590CE04]\n\n`;
+const NTSC_DEFAULT_OUTPUT = `gametitle=Gran Turismo 3 [PBPX_955.03;1]NTSC [8AA991B0]\n\n`;
 
 function setOutput(){
 

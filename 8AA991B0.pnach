@@ -1,0 +1,37 @@
+gametitle=Gran Turismo 3 [PBPX_955.03;1]NTSC [8AA991B0] 
+
+// AI Rubberband #1: 1 - (100.00%)
+patch=1,EE,21FC0460,extended,3f800000
+
+// AI Rubberband #2: 1 - (100.00%)
+patch=1,EE,21FC1B3C,extended,3f800000
+
+// AI Rubberband #3: 1 - (100.00%)
+patch=1,EE,21FC3218,extended,3f800000
+
+// AI Rubberband #4: 1 - (100.00%)
+patch=1,EE,21FC48F4,extended,3f800000
+
+// AI Rubberband #5: 1 - (100.00%)
+patch=1,EE,21FC5FD0,extended,3f800000
+
+// AI Max Throttle #1: 1 - (100.00%)
+patch=1,EE,21FBFEF8,extended,3f800000
+
+// AI Max Throttle #2: 1 - (100.00%)
+patch=1,EE,21FC15D4,extended,3f800000
+
+// AI Max Throttle #3: 1 - (100.00%)
+patch=1,EE,21FC2CB0,extended,3f800000
+
+// AI Max Throttle #4: 1 - (100.00%)
+patch=1,EE,21FC438C,extended,3f800000
+
+// AI Max Throttle #5: 1 - (100.00%)
+patch=1,EE,21FC5A68,extended,3f800000
+
+// Global Car Power Multiplier: 4 Times Power
+patch=1,EE,20350324,extended,421ccccd
+
+// Career CASH: 9,999,999
+patch=1,EE,20350324,extended,0098967F
