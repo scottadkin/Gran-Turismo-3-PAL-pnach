@@ -108,6 +108,11 @@ const GRAVITY_VALES = [
     {"displayValue": "Jupiter", "value": "41c651ec"},
 ];
 
+const GAME_REGIONS = [
+    {"displayValue": "PAL", "value": "pal"},
+    {"displayValue": "NTSC", "value": "ntsc"},
+];
+
 const AI_RUBBERBAND_VALUES = [];
 const AI_MAX_THROTTLE_VALUES = [];
 
@@ -137,42 +142,109 @@ function sortByDisplayValue(a, b){
 AI_RUBBERBAND_VALUES.sort(sortByDisplayValue);
 AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 
+let region = "pal";
+
 const ADDRESSES = {
     //PAL 209539F8 NTSC //20958EF8
-    "cash": {"displayValue": "Money", "address": "209539F8", "selected": null},
+    "cash": {
+        "displayValue": "Money", 
+        "address": {"pal": "209539F8", "ntsc": "20958EF8"}, 
+        "selected": null
+    },
     // PAL 20351Cb8  9.800000191 // NTSC 2035032C // 
-    "power": {"displayValue": "Global Power Multiplier", "address": "20351Cb8", "selected": null},
+    "power": {
+        "displayValue": "Global Power Multiplier", 
+        "address": {"pal": "20351Cb8", "ntsc": "2035032C"}, 
+        "selected": null
+    },
     //9800 default value // PAL 20351B5c NTSC 203501D0 // offset 6540
-    "tyreWear": {"displayValue": "Global Tyre Wear Multiplier", "address": "20351B5c", "selected": null},
+    "tyreWear": {
+        "displayValue": "Global Tyre Wear Multiplier", 
+        "address": {"pal": "20351B5c", "ntsc": "203501D0"}, 
+        "selected": null
+    },
     //default value 0.1000000015
-    "drag": {"displayValue": "Global Drag", "address": "20351B70", "selected": null},
+    "drag": {
+        "displayValue": "Global Drag", 
+        "address": {"pal": "20351B70", "ntsc": ""}, 
+        "selected": null
+    },
     //default value 0.001000000047 // PAL 20351d0c // NTSC 20350380
-    "gearScale": {"displayValue": "Global Gear Scale", "address": "20351d0c", "selected": null},
+    "gearScale": {
+        "displayValue": "Global Gear Scale", 
+        "address": {"pal": "20351d0c", "ntsc": "20350380"}, 
+        "selected": null
+    },
     //default value 9.800000191, PAL 20351ED4 NTSC 20350544 //offset of 6544
-    "gravity": {"displayValue": "Gravity", "address": "20351ED4", "selected": null},
+    "gravity": {
+        "displayValue": "Gravity",
+        "address": {"pal": "20351ED4", "ntsc": "20350544"}, 
+        "selected": null
+    },
 
     //PAL 21FC0460 //NTSC 21FC0460
-    "aiRubberband1": {"displayValue": "AI Rubberband #1", "address": "21FC0460", "selected": null},
+    "aiRubberband1": {
+        "displayValue": "AI Rubberband #1", 
+        "address": {"pal": "21FC0460", "ntsc": "21FC0460"}, 
+        "selected": null
+    },
     //PAL 21FC1B3C //NTSC 21FC1B3C
-    "aiRubberband2": {"displayValue": "AI Rubberband #2", "address": "21FC1B3C", "selected": null},
+    "aiRubberband2": {
+        "displayValue": "AI Rubberband #2", 
+        "address": {"pal": "21FC1B3C", "ntsc": "21FC1B3C"}, 
+        "selected": null
+    },
     //PAL 21FC3218 //NTSC 21FC48F4
-    "aiRubberband3": {"displayValue": "AI Rubberband #3", "address": "21FC3218", "selected": null},
+    "aiRubberband3": {
+        "displayValue": "AI Rubberband #3", 
+        "address": {"pal": "21FC3218", "ntsc": "21FC48F4"}, 
+        "selected": null
+    },
     //PAL 21FC48F4 //NTSC 21FC5FD0
-    "aiRubberband4": {"displayValue": "AI Rubberband #4", "address": "21FC48F4", "selected": null},
+    "aiRubberband4": {
+        "displayValue": "AI Rubberband #4", 
+        "address": {"pal": "21FC48F4", "ntsc": "21FC5FD0"}, 
+        "selected": null
+    },
     //PAL 21FC5FD0 //NTSC 21FC3218
-    "aiRubberband5": {"displayValue": "AI Rubberband #5", "address": "21FC5FD0", "selected": null},
+    "aiRubberband5": {
+        "displayValue": "AI Rubberband #5", 
+        "address": {"pal": "21FC5FD0", "ntsc": "21FC3218"}, 
+        "selected": null
+    },
     
     
     //PAL 21FBFEF8  //NTSC 21FC15D4
-    "aiMaxThrottle1": {"displayValue": "AI MAX Throttle #1", "address": "21FBFEF8", "selected": null},
+    "aiMaxThrottle1": {
+        "displayValue": "AI MAX Throttle #1", 
+        "address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
+        "selected": null
+    },
     //PAL 21FC15D4  //NTSC 21FC2CB0
-    "aiMaxThrottle2": {"displayValue": "AI MAX Throttle #2", "address": "21FC15D4", "selected": null},
+    "aiMaxThrottle2": {
+        "displayValue": "AI MAX Throttle #2", 
+        "address": {"pal": "21FC15D4", "ntsc": "21FC2CB0"}, 
+        "selected": null
+        
+    },
     //PAL 21FC2CB0  //NTSC 21FC438C
-    "aiMaxThrottle3": {"displayValue": "AI MAX Throttle #3", "address": "21FC2CB0", "selected": null},
+    "aiMaxThrottle3": {
+        "displayValue": "AI MAX Throttle #3", 
+        "address": {"pal": "21FC2CB0", "ntsc": "21FC438C"}, 
+        "selected": null
+    },
     //PAL 21FC438C  //NTSC 21FBFEF8
-    "aiMaxThrottle4": {"displayValue": "AI MAX Throttle #4", "address": "21FC438C", "selected": null}, 
+    "aiMaxThrottle4": {
+        "displayValue": "AI MAX Throttle #4", 
+        "address": {"pal": "21FC438C", "ntsc": "21FBFEF8"}, 
+        "selected": null
+    }, 
     //PAL 21FC5A68  //NTSC 21FC5A68
-    "aiMaxThrottle5": {"displayValue": "AI MAX Throttle #5", "address": "21FC5A68", "selected": null},
+    "aiMaxThrottle5": {
+        "displayValue": "AI MAX Throttle #5", 
+        "address": {"pal": "21FC5A68", "ntsc": "21FC5A68"}, 
+        "selected": null
+    },
 };
 
 
@@ -200,7 +272,13 @@ function setOutput(){
 
     const elem = document.querySelector("#output");
 
-    let string = DEFAULT_OUTPUT;
+    let string = "";
+
+    if(region === "pal"){
+        string = DEFAULT_OUTPUT;
+    }else if(region === "ntsc"){
+        string = NTSC_DEFAULT_OUTPUT;
+    }
 
     if(ADDRESSES.power.selected !== null){
 
@@ -208,7 +286,7 @@ function setOutput(){
 
         string += writeCheat(
             `Global Car Power Multiplier: ${v.selected.displayValue}`, 
-            v.address,
+            v.address[region],
             v.selected.value
         );
     }
@@ -219,7 +297,7 @@ function setOutput(){
 
         string += writeCheat(
             `Drag Multiplier: ${v.selected.displayValue}`, 
-            v.address,
+            v.address[region],
             v.selected.value
         );
     }
@@ -230,7 +308,7 @@ function setOutput(){
 
         string += writeCheat(
             `Gear Scale Multiplier: ${v.selected.displayValue}`, 
-            v.address,
+            v.address[region],
             v.selected.value
         );
     }
@@ -241,7 +319,7 @@ function setOutput(){
         
         string += writeCheat(
             `Career CASH: ${v.selected.displayValue}`, 
-            v.address,
+            v.address[region],
             v.selected.value
         );
     }
@@ -256,7 +334,7 @@ function setOutput(){
         
             string += writeCheat(
                 `AI Rubberband #${i}: ${v.selected.displayValue}`, 
-                ADDRESSES[key].address,
+                ADDRESSES[key].address[region],
                 v.selected.value
             );
         }
@@ -272,7 +350,7 @@ function setOutput(){
         
             string += writeCheat(
                 `AI Max Throttle #${i}: ${v.selected.displayValue}`, 
-                ADDRESSES[key].address,
+                ADDRESSES[key].address[region],
                 v.selected.value
             );
         }
@@ -284,7 +362,7 @@ function setOutput(){
         
         string += writeCheat(
             `Tyre Wear Scale: ${v.selected.displayValue}`, 
-            v.address,
+            v.address[region],
             v.selected.value
         );
     }
@@ -295,7 +373,7 @@ function setOutput(){
         
         string += writeCheat(
             `Gravity: ${v.selected.displayValue}`, 
-            v.address,
+            v.address[region],
             v.selected.value
         );
     }
@@ -334,6 +412,17 @@ function setDropDown(id, options, selectedCheatsKey){
 
 (() =>{
 
+    const rElem = document.querySelector("#region");
+
+    rElem.addEventListener("change", (e) =>{
+        console.log(e);
+        region = e.target.value;
+        console.log(region);
+        setOutput();
+    });
+   
+
+    //setDropDown("#region", GAME_REGIONS, "region");
     setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
     setDropDown("#gravity", GRAVITY_VALES, "gravity");
     setDropDown("#cash", CASH_VALUES, "cash");
