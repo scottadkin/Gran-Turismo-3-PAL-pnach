@@ -1,5 +1,6 @@
 const FLOAT_VALUES = {
     0.1: "3dcccccd",
+    0.2: "3e4ccccd",
     0.25: "3e800000",
     0.3: "3e99999a",
     0.4: "3ecccccd",
@@ -9,8 +10,13 @@ const FLOAT_VALUES = {
     0.8: "3f4ccccd",
     0.9: "3f666666",
     1: "3f800000",
+    1.05: "3f866666",
     1.1: "3f8ccccd",
+    1.15: "3f933333",
+    1.2: "3f99999a",
     1.25: "3fa00000",
+    1.3: "3fa66666",
+    1.4: "3fb33333",
     1.5:"3fc00000",
     1.75: "3fe00000",
     2: "40000000",
@@ -415,9 +421,7 @@ function setDropDown(id, options, selectedCheatsKey){
     const rElem = document.querySelector("#region");
 
     rElem.addEventListener("change", (e) =>{
-        console.log(e);
         region = e.target.value;
-        console.log(region);
         setOutput();
     });
    
