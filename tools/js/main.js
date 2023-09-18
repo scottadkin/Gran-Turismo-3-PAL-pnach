@@ -75,15 +75,15 @@ const CASH_VALUES = [
 ];
 
 const DRAG_VALUES = [//be4ccccd
-    {"displayValue": "10 Times Negative", "value": "bf800000"},
-    {"displayValue": "Quad Negative", "value": "becccccd"},
-    {"displayValue": "Double Negative", "value": "be4ccccd"},
-    {"displayValue": "Negative", "value": "bdcccccd"},
+    {"displayValue": "-1000% 10 Times Negative", "value": "bf800000"},
+    {"displayValue": "-400% Quad Negative", "value": "becccccd"},
+    {"displayValue": "-200% Double Negative", "value": "be4ccccd"},
+    {"displayValue": "-100% Negative", "value": "bdcccccd"},
     {"displayValue": "None", "value": "00000000"},
-    {"displayValue": "Normal", "value": "3dcccccd"},
-    {"displayValue": "Double", "value": "3e4ccccd"},
-    {"displayValue": "Quad", "value": "3ecccccd"},
-    {"displayValue": "10 Times", "value": "3f800000"},
+    {"displayValue": "100% Normal", "value": "3dcccccd"},
+    {"displayValue": "200% Double", "value": "3e4ccccd"},
+    {"displayValue": "400% Quad", "value": "3ecccccd"},
+    {"displayValue": "1000% 10 Times", "value": "3f800000"},
 ];
 
 const gearDefault = 0.001000000047;
@@ -98,11 +98,19 @@ const GEAR_VALUES = [//be4ccccd
     {"displayValue": "25%", "value": "3983126f"},
     {"displayValue": "10%", "value": "38d1b717"},
 ];
-
+//9800
 const TYRE_WEAR_SCALE_VALUES = [
     {"displayValue": "10000% Scale", "value": "42c40000"},
     {"displayValue": "1000% Scale", "value": "44750000"},
     {"displayValue": "Default", "value": "46192000"},//value might be wrong(hex i mean)
+    {"displayValue": "90% Scale", "value": "4609d000"},
+    {"displayValue": "80% Scale", "value": "45f50000"},
+    {"displayValue": "70% Scale", "value": "45d66000"},
+    {"displayValue": "60% Scale", "value": "45b7c000"},
+    {"displayValue": "50% Scale", "value": "45992000"},
+    {"displayValue": "40% Scale", "value": "45750000"},
+    {"displayValue": "30% Scale", "value": "4537c000"},
+    {"displayValue": "20% Scale", "value": "44f50000"},
     {"displayValue": "10% Scale", "value": "47bf6800"},
     {"displayValue": "1% Scale", "value": "496f4200"},
 ];
@@ -274,6 +282,27 @@ function createOption(elem, displayValue, value){
 const DEFAULT_OUTPUT = `gametitle=Gran Turismo 3 [SCES_502.94;1]PAL [B590CE04]\n\n`;
 const NTSC_DEFAULT_OUTPUT = `gametitle=Gran Turismo 3 [PBPX_955.03;1]NTSC [8AA991B0]\n\n`;
 
+
+function updateDownload(data, region){
+
+    const download = document.querySelector("#download");
+
+    if(region === "ntsc"){
+        fileName = "8AA991B0";
+    }else if(region === "pal"){
+        fileName = "B590CE04";
+    }else{
+        fileName = "Unknown";
+    }
+
+
+    const rawData = new Blob([data]);
+
+    download.download = `${fileName}.pnach`;
+
+    download.href = URL.createObjectURL(rawData);
+}
+
 function setOutput(){
 
     const elem = document.querySelector("#output");
@@ -385,6 +414,8 @@ function setOutput(){
     }
 
     elem.innerHTML = string.replaceAll("\n","<br/>");
+
+    updateDownload(string, region);
 }
 
 function setDropDown(id, options, selectedCheatsKey){
@@ -447,5 +478,8 @@ function setDropDown(id, options, selectedCheatsKey){
     setDropDown("#mf-5", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle5");
 
     setOutput();
+
+
+    
 
 })();

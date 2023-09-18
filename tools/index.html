@@ -11,26 +11,28 @@
             Gran Turismo 3 PAL PCSX2 Cheat Tool
         </h1>
         <div class="box">
-            <div class="box-title">Available Cheats</div>
-            <div class="warning">
-                Do not use the rubberband cheats if you want to do license tests, it will crash the game on the NTSC version.
-            </div>
-            
-            <div class="form-row">
-                <div class="form-label">
-                    Game Version
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <div class="form-info-header">Game Region</div>
+                    <div class="form-info-content">
+                        Different regions of the world have slightly different versions.
+                    </div>
                 </div>
                 <div class="form-item">
                     <select id="region" defaultValue="pal">
-                        <option value="pal">PAL</option>
-                        <option value="ntsc">NTSC</option>
+                        <option value="pal">PAL(Europe)</option>
+                        <option value="ntsc">NTSC(USA)</option>
                     </select>
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-label">
-                    Power Multiplier
+            
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <div class="form-info-header">Power Multiplier</div>
+                    <div class="form-info-content">
+                        Global power scale, higher the value the more power every car will have.
+                    </div>
                 </div>
                 <div class="form-item">
                     <select id="power-multiplier" defaultValue="411ccccd">
@@ -38,9 +40,13 @@
                     </select>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-label">
-                    Gravity
+
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <div class="form-info-header">Gravity</div>
+                    <div class="form-info-content">
+                        Global gravity.
+                    </div>
                 </div>
                 <div class="form-item">
                     <select id="gravity">
@@ -48,9 +54,13 @@
                     </select>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-label">
-                    Cash Value
+
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <div class="form-info-header">Cash</div>
+                    <div class="form-info-content">
+                        Force your career profile cash to this value.
+                    </div>
                 </div>
                 <div class="form-item">
                     <select id="cash" defaultValue="411ccccd">
@@ -58,9 +68,13 @@
                     </select>
                 </div>
             </div>
-            <div class="form-row">
-                <div class="form-label">
-                    Drag Multiplier
+
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <div class="form-info-header">Drag Scale</div>
+                    <div class="form-info-content">
+                        Global drag force applied to cars, if you use a negative value cars will speed up the faster they go until the game crashes, higher values make it harder to reach max speeds.
+                    </div>
                 </div>
                 <div class="form-item">
                     <select id="global-drag">
@@ -69,10 +83,15 @@
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-label">
-                    Gear Ratio Scale
+            <div class="form-wrapper">
+                
+                <div class="form-info">
+                    <div class="form-info-header">Gear Ratio Scale</div>
+                    <div class="form-info-content">
+                        This affects all cars' gear ratios, the lower the percentage the longer the gears will be, I recommened 80% or 90% if you use a power multiplier > 200%.
+                    </div>
                 </div>
+ 
                 <div class="form-item">
                     <select id="gear-ratio">
                         <option value="">Disabled</option>
@@ -80,9 +99,12 @@
                 </div>
             </div>
 
-            <div class="form-row">
-                <div class="form-label">
-                    Tyre Wear Scale
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <div class="form-info-header">Tyre Wear Scale</div>
+                    <div class="form-info-content">
+                        This affects all cars tyre wear, the lower the percentage the longer the tyres last.
+                    </div>
                 </div>
                 <div class="form-item">
                     <select id="tyre-wear-scale">
@@ -90,113 +112,143 @@
                     </select>
                 </div>
             </div>
+
+
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <div class="form-info-header">AI Rubberband</div>
+                    <div class="form-info-content">
+                        The higher the number the faster the AI will be.
+                    </div>
+                </div>
+                <div class="warning">
+                    Do not use if you want to do the license tests, it will crash the game on the NTSC version.
+                </div>
+
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #1 Rubberband value
+                    </div>
+                    <div class="form-item">
+                        <select id="rb-1" defaultValue="411ccccd">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #2 Rubberband value
+                    </div>
+                    <div class="form-item">
+                        <select id="rb-2" defaultValue="411ccccd">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #3 Rubberband value
+                    </div>
+                    <div class="form-item">
+                        <select id="rb-3" defaultValue="411ccccd">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #4 Rubberband value
+                    </div>
+                    <div class="form-item">
+                        <select id="rb-4" defaultValue="411ccccd">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #5 Rubberband value
+                    </div>
+                    <div class="form-item">
+                        <select id="rb-5" defaultValue="411ccccd">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
             
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #1 Rubberband value
+
+            <div class="form-wrapper">
+                <div class="form-info">
+                    <div class="form-info-header">AI Max Throttle</div>
+                    <div class="form-info-content">
+                        In easier events the AI cars will not use 100&percnt; throttle to make it easier for the player, setting it to 100&percnt; stops this from happening.
+                        You can also set it to more than 100&percnt; but it will not affect turbo cars.
+                    </div>
                 </div>
-                <div class="form-item">
-                    <select id="rb-1" defaultValue="411ccccd">
-                        <option value="">Disabled</option>
-                    </select>
+
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #1 Max Throttle
+                    </div>
+                    <div class="form-item">
+                        <select id="mf-1" defaultValue="3f800000">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
                 </div>
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #2 Max Throttle
+                    </div>
+                    <div class="form-item">
+                        <select id="mf-2" defaultValue="3f800000">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #3 Max Throttle
+                    </div>
+                    <div class="form-item">
+                        <select id="mf-3" defaultValue="3f800000">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #4 Max Throttle
+                    </div>
+                    <div class="form-item">
+                        <select id="mf-4" defaultValue="3f800000">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-label">
+                        AI Car #5 Max Throttle
+                    </div>
+                    <div class="form-item">
+                        <select id="mf-5" defaultValue="3f800000">
+                            <option value="">Disabled</option>
+                        </select>
+                    </div>
+                </div>
+                
             </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #2 Rubberband value
-                </div>
-                <div class="form-item">
-                    <select id="rb-2" defaultValue="411ccccd">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #3 Rubberband value
-                </div>
-                <div class="form-item">
-                    <select id="rb-3" defaultValue="411ccccd">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #4 Rubberband value
-                </div>
-                <div class="form-item">
-                    <select id="rb-4" defaultValue="411ccccd">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #5 Rubberband value
-                </div>
-                <div class="form-item">
-                    <select id="rb-5" defaultValue="411ccccd">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #1 Max Throttle
-                </div>
-                <div class="form-item">
-                    <select id="mf-1" defaultValue="3f800000">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #2 Max Throttle
-                </div>
-                <div class="form-item">
-                    <select id="mf-2" defaultValue="3f800000">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #3 Max Throttle
-                </div>
-                <div class="form-item">
-                    <select id="mf-3" defaultValue="3f800000">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #4 Max Throttle
-                </div>
-                <div class="form-item">
-                    <select id="mf-4" defaultValue="3f800000">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-row">
-                <div class="form-label">
-                    AI Car #5 Max Throttle
-                </div>
-                <div class="form-item">
-                    <select id="mf-5" defaultValue="3f800000">
-                        <option value="">Disabled</option>
-                    </select>
-                </div>
-            </div>
+            
+            
 
         </div>
         <div class="box">
             <div class="box-title">Output</div>
             <div class="output" id="output">
-
+            </div>
+            <div id="download-wrapper">
+                <a id="download" class="center" download target="_blank">Download Cheat File</a>
             </div>
         </div>
     </body>
