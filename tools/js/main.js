@@ -157,6 +157,7 @@ AI_RUBBERBAND_VALUES.sort(sortByDisplayValue);
 AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 
 let _region = "pal";
+const _groups = {"aiThrottleAsGroup" : false};
 
 const ADDRESSES = {
     //PAL 209539F8 NTSC //20958EF8
@@ -229,6 +230,11 @@ const ADDRESSES = {
     
     
     //PAL 21FBFEF8  //NTSC 21FC15D4
+    "aiMaxThrottleAll": {
+        "displayValue": "ALL AI MAX Throttle", 
+        //"address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
+        "selected": null
+    },
     "aiMaxThrottle1": {
         "displayValue": "AI MAX Throttle #1", 
         "address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
@@ -270,6 +276,17 @@ function writeCheat(description, address, value){
     return `${string}\n`;
 }
 
+function writeGroupCheat(description, addresses, value){
+
+    let string = `// ${description}\n`;
+
+    for(let i = 0; i < addresses.length; i++){
+        string += `patch=1,EE,${addresses[i]},extended,${value}\n`;
+    }
+
+    return `${string}\n`;
+
+}
 
 function createOption(elem, displayValue, value){
 
@@ -303,27 +320,47 @@ function updateDownload(data, region){
     download.href = URL.createObjectURL(rawData);
 }
 
-function createCheatLine(region, key, comment){
+/**
+ * 
+ * @param {*} region 
+ * @param {*} key 
+ * @param {*} comment 
+ * @param {*} forceTargetKey only used for groups, basically make the function use the value stored in that address key instead of the normal key
+ * @returns 
+ */
+function createCheatLine(region, key, comment, forceTargetKey){
 
     if(ADDRESSES[key] === undefined){
         throw new Error(`ADDRESSES[${key}] is undefined.`);
     }
 
+    let value = 0;
+    let displayValue = "";
+
     const address = ADDRESSES[key];
+    if(address.selected == null && forceTargetKey === undefined) return "";
 
-    console.log(region, key);
-    console.log(address);
+    if(address.selected != undefined){
+        value = address.selected.value ?? 0;
+        displayValue = address.selected.displayValue;
+    }
 
-    if(address.selected === null) return "";
+    if(forceTargetKey !== undefined){
+
+        if(ADDRESSES[forceTargetKey].selected === null) return;
+        value = ADDRESSES[forceTargetKey].selected.value;
+        displayValue = ADDRESSES[forceTargetKey].selected.displayValue;
+    }
+
 
     if(address.address[region] === undefined){
         throw new Error(`ADDRESSES[${key}].${region} is undefined`);
     }
 
     return writeCheat(
-        `${comment}: ${address.selected.displayValue}`, 
+        `${comment}: ${displayValue}`, 
         address.address[region],
-        address.selected.value
+        value
     );
 }
 
@@ -352,12 +389,18 @@ function setOutput(){
         string += createCheatLine(_region, `aiRubberband${i}`, `AI Rubberband #${i}`) ?? "";
     }
 
-    //seperate into to for lops to keep similar cheats together for easier manual editing
+    //seperate into for lops to keep similar cheats together for easier manual editing
 
     for(let i = 1; i <= 5; i++){
 
-        string += createCheatLine(_region, `aiMaxThrottle${i}`, `AI Max Throttle #${i}`) ?? "";
+        if(!_groups["aiThrottleAsGroup"]){
+            string += createCheatLine(_region, `aiMaxThrottle${i}`, `AI Max Throttle #${i}`) ?? "";
+        }else{
+
+            string += createCheatLine(_region, `aiMaxThrottle${i}`, `AI Max Throttle #${i}`, "aiMaxThrottleAll")?? "";
+        }
     }
+ 
 
     elem.innerHTML = string.replaceAll("\n","<br/>");
 
@@ -393,6 +436,49 @@ function setDropDown(id, options, selectedCheatsKey){
     }); 
 }
 
+function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, setOutput){
+
+    parent = document.querySelector(parent);
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "toggle-group";
+
+    const header = document.createElement("div");
+    header.className = "toggle-info";
+    header.innerHTML = text;
+
+    const button = document.createElement("div");
+    button.className = "toggle-button";
+    button.innerHTML = "Disabled";
+
+    button.addEventListener("click", () =>{
+
+        _groups[valueKey] = !_groups[valueKey];
+        const value = _groups[valueKey];
+        
+
+        if(value){
+            button.className = `toggle-button toggle-enabled`;
+            button.innerHTML = "Enabled";
+            groupElem.className = "hidden";
+            allElem.className = "";
+        }else{
+            button.className = `toggle-button toggle-disabled`;
+            button.innerHTML = "Disabled";
+            groupElem.className = "";
+            allElem.className = "hidden";
+        }
+
+        setOutput();
+    });
+
+
+    wrapper.appendChild(header);
+    wrapper.appendChild(button);
+    parent.appendChild(wrapper);
+}
+
+
 (() =>{
 
     const rElem = document.querySelector("#region");
@@ -402,6 +488,9 @@ function setDropDown(id, options, selectedCheatsKey){
         setOutput();
     });
    
+    const throttleGroup = document.querySelector("#throttle-default");
+    const throttleAll = document.querySelector("#throttle-all");
+
 
     //setDropDown("#region", GAME_REGIONS, "region");
     setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
@@ -417,15 +506,16 @@ function setDropDown(id, options, selectedCheatsKey){
     setDropDown("#rb-4", AI_RUBBERBAND_VALUES, "aiRubberband4");
     setDropDown("#rb-5", AI_RUBBERBAND_VALUES, "aiRubberband5");
 
+    setDropDown("#mf-all", AI_MAX_THROTTLE_VALUES, "aiMaxThrottleAll");
     setDropDown("#mf-1", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle1");
     setDropDown("#mf-2", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle2");
     setDropDown("#mf-3", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle3");
     setDropDown("#mf-4", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle4");
     setDropDown("#mf-5", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle5");
 
+    createToggleGroupButton("#ai-throttle-group", "Use a single value for all the AI Max Throttle", "aiThrottleAsGroup", throttleGroup, throttleAll, setOutput);
+
     setOutput();
 
-
     
-
 })();
