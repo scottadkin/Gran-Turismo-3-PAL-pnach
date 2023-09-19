@@ -347,37 +347,16 @@ function setOutput(){
     string += createCheatLine(_region, "gravity", "Gravity") ?? "";
 
 
+    for(let i = 1; i <= 5; i++){
 
-    for(let i = 1; i < 6; i++){
-
-        const key = `aiRubberband${i}`;
-
-        if(ADDRESSES[key].selected !== null){
-
-            const v = ADDRESSES[key];
-        
-            string += writeCheat(
-                `AI Rubberband #${i}: ${v.selected.displayValue}`, 
-                ADDRESSES[key].address[_region],
-                v.selected.value
-            );
-        }
+        string += createCheatLine(_region, `aiRubberband${i}`, `AI Rubberband #${i}`) ?? "";
     }
 
-    for(let i = 1; i < 6; i++){
+    //seperate into to for lops to keep similar cheats together for easier manual editing
 
-        const key = `aiMaxThrottle${i}`;
+    for(let i = 1; i <= 5; i++){
 
-        if(ADDRESSES[key].selected !== null){
-
-            const v = ADDRESSES[key];
-        
-            string += writeCheat(
-                `AI Max Throttle #${i}: ${v.selected.displayValue}`, 
-                ADDRESSES[key].address[_region],
-                v.selected.value
-            );
-        }
+        string += createCheatLine(_region, `aiMaxThrottle${i}`, `AI Max Throttle #${i}`) ?? "";
     }
 
     elem.innerHTML = string.replaceAll("\n","<br/>");
