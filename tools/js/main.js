@@ -79,7 +79,7 @@ const DRAG_VALUES = [//be4ccccd
     {"displayValue": "-400% Quad Negative", "value": "becccccd"},
     {"displayValue": "-200% Double Negative", "value": "be4ccccd"},
     {"displayValue": "-100% Negative", "value": "bdcccccd"},
-    {"displayValue": "None", "value": "00000000"},
+    {"displayValue": "0%", "value": "00000000"},
     {"displayValue": "100% Normal", "value": "3dcccccd"},
     {"displayValue": "200% Double", "value": "3e4ccccd"},
     {"displayValue": "400% Quad", "value": "3ecccccd"},
@@ -156,7 +156,7 @@ function sortByDisplayValue(a, b){
 AI_RUBBERBAND_VALUES.sort(sortByDisplayValue);
 AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 
-let region = "pal";
+let _region = "pal";
 
 const ADDRESSES = {
     //PAL 209539F8 NTSC //20958EF8
@@ -180,7 +180,7 @@ const ADDRESSES = {
     //default value 0.1000000015
     "drag": {
         "displayValue": "Global Drag", 
-        "address": {"pal": "20351B70", "ntsc": ""}, 
+        "address": {"pal": "20351B70", "ntsc": null}, 
         "selected": null
     },
     //default value 0.001000000047 // PAL 20351d0c // NTSC 20350380
@@ -303,61 +303,50 @@ function updateDownload(data, region){
     download.href = URL.createObjectURL(rawData);
 }
 
+function createCheatLine(region, key, comment){
+
+    if(ADDRESSES[key] === undefined){
+        throw new Error(`ADDRESSES[${key}] is undefined.`);
+    }
+
+    const address = ADDRESSES[key];
+
+    console.log(region, key);
+    console.log(address);
+
+    if(address.selected === null) return "";
+
+    if(address.address[region] === undefined){
+        throw new Error(`ADDRESSES[${key}].${region} is undefined`);
+    }
+
+    return writeCheat(
+        `${comment}: ${address.selected.displayValue}`, 
+        address.address[region],
+        address.selected.value
+    );
+}
+
 function setOutput(){
 
     const elem = document.querySelector("#output");
 
     let string = "";
 
-    if(region === "pal"){
+    if(_region === "pal"){
         string = DEFAULT_OUTPUT;
-    }else if(region === "ntsc"){
+    }else if(_region === "ntsc"){
         string = NTSC_DEFAULT_OUTPUT;
     }
 
-    if(ADDRESSES.power.selected !== null){
+    string += createCheatLine(_region, "power", "Global Power Multiplier") ?? "";
+    string += createCheatLine(_region, "drag", "Drag Multiplier") ?? "";
+    string += createCheatLine(_region, "gearScale", "Gear Scale Multiplier") ?? "";
+    string += createCheatLine(_region, "cash", "Career Cash") ?? "";
+    string += createCheatLine(_region, "tyreWear", "Tyre Wear Scale") ?? "";
+    string += createCheatLine(_region, "gravity", "Gravity") ?? "";
 
-        const v = ADDRESSES.power;
 
-        string += writeCheat(
-            `Global Car Power Multiplier: ${v.selected.displayValue}`, 
-            v.address[region],
-            v.selected.value
-        );
-    }
-
-    if(ADDRESSES.drag.selected !== null){
-
-        const v = ADDRESSES.drag;
-
-        string += writeCheat(
-            `Drag Multiplier: ${v.selected.displayValue}`, 
-            v.address[region],
-            v.selected.value
-        );
-    }
-
-    if(ADDRESSES.gearScale.selected !== null){
-
-        const v = ADDRESSES.gearScale;
-
-        string += writeCheat(
-            `Gear Scale Multiplier: ${v.selected.displayValue}`, 
-            v.address[region],
-            v.selected.value
-        );
-    }
-
-    if(ADDRESSES.cash.selected !== null){
-
-        const v = ADDRESSES.cash;
-        
-        string += writeCheat(
-            `Career CASH: ${v.selected.displayValue}`, 
-            v.address[region],
-            v.selected.value
-        );
-    }
 
     for(let i = 1; i < 6; i++){
 
@@ -369,7 +358,7 @@ function setOutput(){
         
             string += writeCheat(
                 `AI Rubberband #${i}: ${v.selected.displayValue}`, 
-                ADDRESSES[key].address[region],
+                ADDRESSES[key].address[_region],
                 v.selected.value
             );
         }
@@ -385,37 +374,15 @@ function setOutput(){
         
             string += writeCheat(
                 `AI Max Throttle #${i}: ${v.selected.displayValue}`, 
-                ADDRESSES[key].address[region],
+                ADDRESSES[key].address[_region],
                 v.selected.value
             );
         }
     }
 
-    if(ADDRESSES.tyreWear.selected !== null){
-
-        const v = ADDRESSES.tyreWear;
-        
-        string += writeCheat(
-            `Tyre Wear Scale: ${v.selected.displayValue}`, 
-            v.address[region],
-            v.selected.value
-        );
-    }
-
-    if(ADDRESSES.gravity.selected !== null){
-
-        const v = ADDRESSES.gravity;
-        
-        string += writeCheat(
-            `Gravity: ${v.selected.displayValue}`, 
-            v.address[region],
-            v.selected.value
-        );
-    }
-
     elem.innerHTML = string.replaceAll("\n","<br/>");
 
-    updateDownload(string, region);
+    updateDownload(string, _region);
 }
 
 function setDropDown(id, options, selectedCheatsKey){
@@ -452,7 +419,7 @@ function setDropDown(id, options, selectedCheatsKey){
     const rElem = document.querySelector("#region");
 
     rElem.addEventListener("change", (e) =>{
-        region = e.target.value;
+        _region = e.target.value;
         setOutput();
     });
    
