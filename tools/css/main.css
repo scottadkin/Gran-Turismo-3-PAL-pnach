@@ -1,3 +1,7 @@
+:root{
+    --color-red:rgb(120,0,0);
+}
+
 *{
     margin:0;
     padding:0;
@@ -43,7 +47,7 @@ h1{
 .form-row{
     display:grid;
     grid-template-columns: 50% 50%;
-    font-size:20px;
+    font-size:18px;
     margin-bottom:10px;
 }
 
@@ -60,7 +64,7 @@ select{
     min-width:200px;
     width:33%;
     background-color:rgb(51,51,51);
-    font-size:20px;
+    font-size:16px;
     color:rgb(232,232,232);
     box-shadow: 2px 4px 5px rgba(0,0,0,0.7);
     border:1px transparent;
@@ -83,10 +87,9 @@ select{
 
 .warning{
     color:white;
-    background-color:rgb(146,0,0);
+    background-color:var(--color-red);
     text-align:center;
     padding:10px;
-    margin-bottom:5px;
 }
 
 .form-wrapper{
@@ -95,10 +98,10 @@ select{
 }
 
 .form-info-header{
-    font-size:25px;
+    font-size:20px;
     color:black;
     font-weight:bold;
-    padding:2px;
+    padding:5px;
     background-color:rgb(254,169,0);
     background:linear-gradient(to bottom, rgba(254,169,0,0.9), rgba(134,89,0,0.9));
 }
@@ -108,13 +111,11 @@ select{
 }
 
 .form-info-content{
-    padding:25px;
-    width:50%;
+    padding:10px;
     text-align:center;
-    margin-left:auto;
-    margin-right:auto;
-    font-size:19px;
-    line-height:24px;
+    font-size:18px;
+    line-height:26px;
+    background-color:rgba(0,0,0,0.125);
 }
 
 #download-wrapper{
@@ -125,14 +126,15 @@ select{
 #download{
     font-size:24px;
     padding:10px;
-    background-color:rgb(255,0,0);
+    background-color:var(--color-red);
     display:inline-block;
     min-width:200px;
     text-align:center;
+    color:white;
 }
 
 .toggle-group{
-    background-color:rgba(0,0,0,0.25);
+    background-color:rgba(0,0,0,0.125);
     padding:5px;
     margin-bottom:10px;
 }
@@ -147,7 +149,7 @@ select{
     padding:10px;
     font-size:16px;
     user-select: none;
-    background-color:grey;
+    background-color:var(--color-red);
 }
 
 .toggle-button:hover{

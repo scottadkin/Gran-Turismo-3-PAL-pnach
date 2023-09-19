@@ -462,7 +462,7 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
 
     const button = document.createElement("div");
     button.className = "toggle-button";
-    button.innerHTML = "Disabled";
+    button.innerHTML = "False";
 
     button.addEventListener("click", () =>{
 
@@ -472,12 +472,12 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
 
         if(value){
             button.className = `toggle-button toggle-enabled`;
-            button.innerHTML = "Enabled";
+            button.innerHTML = "True";
             groupElem.className = "hidden";
             allElem.className = "";
         }else{
             button.className = `toggle-button toggle-disabled`;
-            button.innerHTML = "Disabled";
+            button.innerHTML = "False";
             groupElem.className = "";
             allElem.className = "hidden";
         }
@@ -530,8 +530,8 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
     setDropDown("#mf-4", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle4");
     setDropDown("#mf-5", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle5");
 
-    createToggleGroupButton("#ai-throttle-group", "Use a single value for all the AI Max Throttle", "aiThrottleAsGroup", throttleGroup, throttleAll, setOutput);
-    createToggleGroupButton("#ai-rubberband-group", "Use a single value for all the AI Rubberband", "aiRubberbandAsGroup", rubberbandGroup, rubberbandAll, setOutput);
+    createToggleGroupButton("#ai-throttle-group", "One value for all the AI Cars Max Throttle", "aiThrottleAsGroup", throttleGroup, throttleAll, setOutput);
+    createToggleGroupButton("#ai-rubberband-group", "One value for all the AI Cars Rubberband", "aiRubberbandAsGroup", rubberbandGroup, rubberbandAll, setOutput);
 
     setOutput();
 
