@@ -157,7 +157,10 @@ AI_RUBBERBAND_VALUES.sort(sortByDisplayValue);
 AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 
 let _region = "pal";
-const _groups = {"aiThrottleAsGroup" : false};
+const _groups = {
+    "aiThrottleAsGroup" : false,
+    "aiRubberbandAsGroup" : false,
+};
 
 const ADDRESSES = {
     //PAL 209539F8 NTSC //20958EF8
@@ -197,6 +200,11 @@ const ADDRESSES = {
         "selected": null
     },
 
+    "aiRubberbandAll": {
+        "displayValue": "ALL AI Rubberband", 
+        //"address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
+        "selected": null
+    },
     //PAL 21FC0460 //NTSC 21FC0460
     "aiRubberband1": {
         "displayValue": "AI Rubberband #1", 
@@ -386,7 +394,11 @@ function setOutput(){
 
     for(let i = 1; i <= 5; i++){
 
-        string += createCheatLine(_region, `aiRubberband${i}`, `AI Rubberband #${i}`) ?? "";
+        if(!_groups["aiRubberbandAsGroup"]){
+            string += createCheatLine(_region, `aiRubberband${i}`, `AI Rubberband #${i}`) ?? "";
+        }else{
+            string += createCheatLine(_region, `aiRubberband${i}`, `AI Rubberband #${i}`, "aiRubberbandAll") ?? "";
+        }
     }
 
     //seperate into for lops to keep similar cheats together for easier manual editing
@@ -396,9 +408,10 @@ function setOutput(){
         if(!_groups["aiThrottleAsGroup"]){
             string += createCheatLine(_region, `aiMaxThrottle${i}`, `AI Max Throttle #${i}`) ?? "";
         }else{
-
             string += createCheatLine(_region, `aiMaxThrottle${i}`, `AI Max Throttle #${i}`, "aiMaxThrottleAll")?? "";
         }
+
+        
     }
  
 
@@ -491,6 +504,9 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
     const throttleGroup = document.querySelector("#throttle-default");
     const throttleAll = document.querySelector("#throttle-all");
 
+    const rubberbandGroup = document.querySelector("#rubberband-default");
+    const rubberbandAll = document.querySelector("#rubberband-all");
+
 
     //setDropDown("#region", GAME_REGIONS, "region");
     setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
@@ -500,6 +516,7 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
     setDropDown("#gear-ratio", GEAR_VALUES, "gearScale");
     setDropDown("#tyre-wear-scale", TYRE_WEAR_SCALE_VALUES, "tyreWear");
 
+    setDropDown("#rb-all", AI_RUBBERBAND_VALUES, "aiRubberbandAll");
     setDropDown("#rb-1", AI_RUBBERBAND_VALUES, "aiRubberband1");
     setDropDown("#rb-2", AI_RUBBERBAND_VALUES, "aiRubberband2");
     setDropDown("#rb-3", AI_RUBBERBAND_VALUES, "aiRubberband3");
@@ -514,6 +531,7 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
     setDropDown("#mf-5", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle5");
 
     createToggleGroupButton("#ai-throttle-group", "Use a single value for all the AI Max Throttle", "aiThrottleAsGroup", throttleGroup, throttleAll, setOutput);
+    createToggleGroupButton("#ai-rubberband-group", "Use a single value for all the AI Rubberband", "aiRubberbandAsGroup", rubberbandGroup, rubberbandAll, setOutput);
 
     setOutput();
 
