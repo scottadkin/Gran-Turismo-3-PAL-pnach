@@ -220,19 +220,19 @@ const ADDRESSES = {
     //PAL 21FC3218 //NTSC 21FC48F4
     "aiRubberband3": {
         "displayValue": "AI Rubberband #3", 
-        "address": {"pal": "21FC3218", "ntsc": "21FC48F4"}, 
+        "address": {"pal": "21FC3218", "ntsc": "21FC3218"}, 
         "selected": null
     },
     //PAL 21FC48F4 //NTSC 21FC5FD0
     "aiRubberband4": {
         "displayValue": "AI Rubberband #4", 
-        "address": {"pal": "21FC48F4", "ntsc": "21FC5FD0"}, 
+        "address": {"pal": "21FC48F4", "ntsc": "21FC48F4"}, 
         "selected": null
     },
     //PAL 21FC5FD0 //NTSC 21FC3218
     "aiRubberband5": {
         "displayValue": "AI Rubberband #5", 
-        "address": {"pal": "21FC5FD0", "ntsc": "21FC3218"}, 
+        "address": {"pal": "21FC5FD0", "ntsc": "21FC5FD0"}, 
         "selected": null
     },
     
