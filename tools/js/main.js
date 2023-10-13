@@ -87,6 +87,7 @@ const DRAG_VALUES = [//be4ccccd
 ];
 
 const gearDefault = 0.001000000047;
+const gripDefault = 0.001000000047;
 
 const GEAR_VALUES = [//be4ccccd
     {"displayValue": `Default`, "value": "3a83126f"},
@@ -120,6 +121,26 @@ const GRAVITY_VALES = [
     {"displayValue": "Sun", "value": "43890000"},
     {"displayValue": "Moon", "value": "3fcf5c29"},
     {"displayValue": "Jupiter", "value": "41c651ec"},
+    {"displayValue": "Double Sun", "value": "44090000"},
+    {"displayValue": "4x Sun", "value": "44890000"},
+    {"displayValue": "8x Sun", "value": "45090000"},
+    //44090000
+];
+
+const GRIP_VALUES = [
+    {"displayValue": "25%", "value": "3983126f"},//
+    {"displayValue": "50%", "value": "3a03126f"},//
+    {"displayValue": "75%", "value": "3a449ba6"},//
+    {"displayValue": "Normal", "value": "3a83126f"},//
+    {"displayValue": "125%", "value": "3aa3d70b"},//
+    {"displayValue": "150%", "value": "3ac49ba6"},//
+    {"displayValue": "175%", "value": "3ae56042"},//
+    {"displayValue": "200%", "value": "3b03126f"},//
+    {"displayValue": "300%", "value": "3b449ba6"},//
+    {"displayValue": "400%", "value": "3b83126f"},//
+    {"displayValue": "500%", "value": "3ba3d70b"},//
+
+    //
 ];
 
 const GAME_REGIONS = [
@@ -173,6 +194,12 @@ const ADDRESSES = {
     "power": {
         "displayValue": "Global Power Multiplier", 
         "address": {"pal": "20351Cb8", "ntsc": "2035032C"}, 
+        "selected": null
+    },
+    //203501D4 //default 0.001000000047
+    "grip": {
+        "displayValue": "Global Grip Multiplier", 
+        "address": {"pal": null, "ntsc": "203501D4"}, 
         "selected": null
     },
     //9800 default value // PAL 20351B5c NTSC 203501D0 // offset 6540
@@ -385,6 +412,7 @@ function setOutput(){
     }
 
     string += createCheatLine(_region, "power", "Global Power Multiplier") ?? "";
+    string += createCheatLine(_region, "grip", "Global Grip Multiplier") ?? "";
     string += createCheatLine(_region, "drag", "Drag Multiplier") ?? "";
     string += createCheatLine(_region, "gearScale", "Gear Scale Multiplier") ?? "";
     string += createCheatLine(_region, "cash", "Career Cash") ?? "";
@@ -511,6 +539,7 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
     //setDropDown("#region", GAME_REGIONS, "region");
     setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
     setDropDown("#gravity", GRAVITY_VALES, "gravity");
+    setDropDown("#grip", GRIP_VALUES, "grip");
     setDropDown("#cash", CASH_VALUES, "cash");
     setDropDown("#global-drag", DRAG_VALUES, "drag");
     setDropDown("#gear-ratio", GEAR_VALUES, "gearScale");
