@@ -188,43 +188,57 @@ const ADDRESSES = {
     "cash": {
         "displayValue": "Money", 
         "address": {"pal": "209539F8", "ntsc": "20958EF8"}, 
-        "selected": null
+        "selected": null,
+        "info": "Career cash value",
+        "options": CASH_VALUES
     },
     // PAL 20351Cb8  9.800000191 // NTSC 2035032C // 
     "power": {
         "displayValue": "Global Power Multiplier", 
         "address": {"pal": "20351Cb8", "ntsc": "2035032C"}, 
-        "selected": null
+        "selected": null,
+        "info": "Global power scale, higher the value the more power every car will have.",
+        "options": POWER_MULTIPLIERS
     },
     //203501D4 //default 0.001000000047
     "grip": {
         "displayValue": "Global Grip Multiplier", 
         "address": {"pal": null, "ntsc": "203501D4"}, 
-        "selected": null
+        "selected": null,
+        "info": "Car grip multiplier",
+        "options": GRIP_VALUES
     },
     //9800 default value // PAL 20351B5c NTSC 203501D0 // offset 6540
     "tyreWear": {
         "displayValue": "Global Tyre Wear Multiplier", 
         "address": {"pal": "20351B5c", "ntsc": "203501D0"}, 
-        "selected": null
+        "selected": null,
+        "info": "This affects all cars tyre wear, the lower the percentage the longer the tyres last.",
+        "options": TYRE_WEAR_SCALE_VALUES
     },
     //default value 0.1000000015
     "drag": {
         "displayValue": "Global Drag", 
         "address": {"pal": "20351B70", "ntsc": null}, 
-        "selected": null
+        "selected": null,
+        "info": "Global drag force applied to all cars, if you use a negative value cars will speed up the faster they go until the game crashes, higher values make it harder to reach max speeds.",
+        "options": DRAG_VALUES
     },
     //default value 0.001000000047 // PAL 20351d0c // NTSC 20350380
     "gearScale": {
         "displayValue": "Global Gear Scale", 
         "address": {"pal": "20351d0c", "ntsc": "20350380"}, 
-        "selected": null
+        "selected": null,
+        "info": "This affects all cars gear ratios, the lower the percentage the longer the gears will be, I recommened 80% or 90% if you use a power multiplier > 200%.",
+        "options": GEAR_VALUES
     },
     //default value 9.800000191, PAL 20351ED4 NTSC 20350544 //offset of 6544
     "gravity": {
         "displayValue": "Gravity",
         "address": {"pal": "20351ED4", "ntsc": "20350544"}, 
-        "selected": null
+        "selected": null,
+        "info": "Global Gravity",
+        "options": GRAVITY_VALES
     },
 
     "aiRubberbandAll": {
@@ -236,31 +250,41 @@ const ADDRESSES = {
     "aiRubberband1": {
         "displayValue": "AI Rubberband #1", 
         "address": {"pal": "21FC0460", "ntsc": "21FC0460"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_RUBBERBAND_VALUES
     },
     //PAL 21FC1B3C //NTSC 21FC1B3C
     "aiRubberband2": {
         "displayValue": "AI Rubberband #2", 
         "address": {"pal": "21FC1B3C", "ntsc": "21FC1B3C"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_RUBBERBAND_VALUES
     },
     //PAL 21FC3218 //NTSC 21FC48F4
     "aiRubberband3": {
         "displayValue": "AI Rubberband #3", 
         "address": {"pal": "21FC3218", "ntsc": "21FC3218"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_RUBBERBAND_VALUES
     },
     //PAL 21FC48F4 //NTSC 21FC5FD0
     "aiRubberband4": {
         "displayValue": "AI Rubberband #4", 
         "address": {"pal": "21FC48F4", "ntsc": "21FC48F4"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_RUBBERBAND_VALUES
     },
     //PAL 21FC5FD0 //NTSC 21FC3218
     "aiRubberband5": {
         "displayValue": "AI Rubberband #5", 
         "address": {"pal": "21FC5FD0", "ntsc": "21FC5FD0"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_RUBBERBAND_VALUES
     },
     
     
@@ -268,37 +292,47 @@ const ADDRESSES = {
     "aiMaxThrottleAll": {
         "displayValue": "ALL AI MAX Throttle", 
         //"address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
-        "selected": null
+        "selected": null,
     },
     "aiMaxThrottle1": {
         "displayValue": "AI MAX Throttle #1", 
         "address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_MAX_THROTTLE_VALUES
     },
     //PAL 21FC15D4  //NTSC 21FC2CB0
     "aiMaxThrottle2": {
         "displayValue": "AI MAX Throttle #2", 
         "address": {"pal": "21FC15D4", "ntsc": "21FC2CB0"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_MAX_THROTTLE_VALUES
         
     },
     //PAL 21FC2CB0  //NTSC 21FC438C
     "aiMaxThrottle3": {
         "displayValue": "AI MAX Throttle #3", 
         "address": {"pal": "21FC2CB0", "ntsc": "21FC438C"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_MAX_THROTTLE_VALUES
     },
     //PAL 21FC438C  //NTSC 21FBFEF8
     "aiMaxThrottle4": {
         "displayValue": "AI MAX Throttle #4", 
         "address": {"pal": "21FC438C", "ntsc": "21FBFEF8"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_MAX_THROTTLE_VALUES
     }, 
     //PAL 21FC5A68  //NTSC 21FC5A68
     "aiMaxThrottle5": {
         "displayValue": "AI MAX Throttle #5", 
         "address": {"pal": "21FC5A68", "ntsc": "21FC5A68"}, 
-        "selected": null
+        "selected": null,
+        "info": "item info",
+        "options": AI_MAX_THROTTLE_VALUES
     },
 };
 
@@ -520,6 +554,76 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
 }
 
 
+function iDontKnowWhatToCallThis(){
+
+}
+
+function createDropDown(selectedCheatsKey){
+
+    const parent = document.querySelector("#dummy");
+    console.log(ADDRESSES[selectedCheatsKey]);
+
+    const cheat = ADDRESSES[selectedCheatsKey];
+
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "form-wrapper";
+
+    const formInfo = document.createElement("div");
+    formInfo.className = "form-info";
+
+    const iHead = document.createElement("div");
+    iHead.className = "form-info-header";
+    iHead.innerHTML = cheat.displayValue ?? "Missing displayValue";
+
+    const iContent = document.createElement("div");
+    iContent.className = "form-info-content";
+    iContent.innerHTML = cheat.info ?? "Missing info";
+
+    const fItem = document.createElement("div");
+    fItem.className = "form-item";
+
+    const selectBox = document.createElement("select");
+    
+    let selectOptions = `<option value="">-</option>`;
+
+    for(let i = 0; i < cheat.options.length; i++){
+
+        const o = cheat.options[i];
+
+        selectOptions += `<option value="${o.value}">${o.displayValue}</option>`;
+    }
+
+    selectBox.innerHTML = selectOptions;
+
+    fItem.appendChild(selectBox);
+
+    formInfo.appendChild(iHead);
+    formInfo.appendChild(iContent);
+    wrapper.appendChild(formInfo);
+    wrapper.appendChild(fItem);
+    parent.appendChild(wrapper);
+
+    selectBox.addEventListener("change", (e) =>{
+
+        const selectedIndex = e.target.selectedIndex - 1;
+
+        if(selectedIndex < 0){
+            ADDRESSES[selectedCheatsKey].selected = null;      
+        }else{
+
+            ADDRESSES[selectedCheatsKey].selected = {
+                "displayValue": cheat.options[selectedIndex].displayValue, 
+                "value": e.target.value
+            };
+
+        }
+        setOutput();
+    }); 
+
+}
+
+
 (() =>{
 
     const rElem = document.querySelector("#region");
@@ -527,6 +631,7 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
     rElem.addEventListener("change", (e) =>{
         _region = e.target.value;
         setOutput();
+        iDontKnowWhatToCallThis();
     });
    
     const throttleGroup = document.querySelector("#throttle-default");
@@ -536,14 +641,34 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
     const rubberbandAll = document.querySelector("#rubberband-all");
 
 
+    createDropDown("power");
+    createDropDown("cash");
+    createDropDown("gravity");
+    createDropDown("grip");
+    createDropDown("drag");
+    createDropDown("gearScale");
+    createDropDown("tyreWear");
+
+    /*createDropDown("aiRubberband1");
+    createDropDown("aiRubberband2");
+    createDropDown("aiRubberband3");
+    createDropDown("aiRubberband4");
+    createDropDown("aiRubberband5");
+
+    createDropDown("aiMaxThrottle1");
+    createDropDown("aiMaxThrottle2");
+    createDropDown("aiMaxThrottle3");
+    createDropDown("aiMaxThrottle4");
+    createDropDown("aiMaxThrottle5");*/
+
     //setDropDown("#region", GAME_REGIONS, "region");
-    setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
+    /*setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
     setDropDown("#gravity", GRAVITY_VALES, "gravity");
     setDropDown("#grip", GRIP_VALUES, "grip");
     setDropDown("#cash", CASH_VALUES, "cash");
     setDropDown("#global-drag", DRAG_VALUES, "drag");
     setDropDown("#gear-ratio", GEAR_VALUES, "gearScale");
-    setDropDown("#tyre-wear-scale", TYRE_WEAR_SCALE_VALUES, "tyreWear");
+    setDropDown("#tyre-wear-scale", TYRE_WEAR_SCALE_VALUES, "tyreWear");*/
 
     setDropDown("#rb-all", AI_RUBBERBAND_VALUES, "aiRubberbandAll");
     setDropDown("#rb-1", AI_RUBBERBAND_VALUES, "aiRubberband1");
