@@ -488,38 +488,12 @@ function setOutput(){
         string = NTSC_DEFAULT_OUTPUT;
     }
 
-    string += createCheatLine(_region, "power", "Global Power Multiplier") ?? "";
-    string += createCheatLine(_region, "grip", "Global Grip Multiplier") ?? "";
-    string += createCheatLine(_region, "drag", "Drag Multiplier") ?? "";
-    string += createCheatLine(_region, "gearScale", "Gear Scale Multiplier") ?? "";
-    string += createCheatLine(_region, "cash", "Career Cash") ?? "";
-    string += createCheatLine(_region, "tyreWear", "Tyre Wear Scale") ?? "";
-    string += createCheatLine(_region, "gravity", "Gravity") ?? "";
-    string += createCheatLine(_region, "licenseTestCarWeight", "License Test Car Weight") ?? "";
+    for(const [key, value] of Object.entries(ADDRESSES)){
 
+        if(value.bIgnore) continue;
 
-    for(let i = 1; i <= 5; i++){
-
-        if(!_groups["aiRubberbandAsGroup"]){
-            string += createCheatLine(_region, `aiRubberband${i}`, `AI Rubberband #${i}`) ?? "";
-        }else{
-            string += createCheatLine(_region, `aiRubberband${i}`, `AI Rubberband #${i}`, "aiRubberbandAll") ?? "";
-        }
+        string += createCheatLine(_region, key, value.displayValue) ?? "";
     }
-
-    //seperate into for lops to keep similar cheats together for easier manual editing
-
-    for(let i = 1; i <= 5; i++){
-
-        if(!_groups["aiThrottleAsGroup"]){
-            string += createCheatLine(_region, `aiMaxThrottle${i}`, `AI Max Throttle #${i}`) ?? "";
-        }else{
-            string += createCheatLine(_region, `aiMaxThrottle${i}`, `AI Max Throttle #${i}`, "aiMaxThrottleAll")?? "";
-        }
-
-        
-    }
- 
 
     elem.innerHTML = string.replaceAll("\n","<br/>");
 
