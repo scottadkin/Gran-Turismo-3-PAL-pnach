@@ -74,6 +74,7 @@ const CASH_VALUES = [
     {"displayValue": "9,999,999", "value": "0098967F"}
 ];
 
+//default 0.1000000015
 const DRAG_VALUES = [//be4ccccd
     {"displayValue": "-1000% 10 Times Negative", "value": "bf800000"},
     {"displayValue": "-400% Quad Negative", "value": "becccccd"},
@@ -146,6 +147,12 @@ const GRIP_VALUES = [
 const GAME_REGIONS = [
     {"displayValue": "PAL", "value": "pal"},
     {"displayValue": "NTSC", "value": "ntsc"},
+];
+
+const WALL_VALUES = [];
+
+const WEIGHT_VALUES = [
+    {"displayValue": "1KG", "value": "3f800000"},
 ];
 
 const AI_RUBBERBAND_VALUES = [];
@@ -241,11 +248,36 @@ const ADDRESSES = {
         "options": GRAVITY_VALES
     },
 
+    //default value -1.049999952
+    "wallThing":{
+        "displayValue": "Wall Pushback",
+        "address": {"pal": "20352054", "ntsc": ""}, 
+        "selected": null,
+        "info": "Force applied when hitting walls",
+        "options": WALL_VALUES
+    },
+
+    "licenseTestCarWeight":{
+        "displayValue": "License Test Car Weight",
+        "address": {"pal": "", "ntsc": "21FF14D4"}, 
+        "selected": null,
+        "info": "Set the cars weight for license tests.",
+        "options": WEIGHT_VALUES
+    },
+    "singleRaceCarWeight":{
+        "displayValue": "Single Race Car Weight",
+        "address": {"pal": "", "ntsc": "21FBD934"}, 
+        "selected": null,
+        "info": "Set the cars weight for single race events.",
+        "options": WEIGHT_VALUES
+    },
     "aiRubberbandAll": {
         "displayValue": "ALL AI Rubberband", 
         //"address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
-        "selected": null
+        "selected": null,
+        "bIgnore": true
     },
+
     //PAL 21FC0460 //NTSC 21FC0460
     "aiRubberband1": {
         "displayValue": "AI Rubberband #1", 
@@ -293,13 +325,14 @@ const ADDRESSES = {
         "displayValue": "ALL AI MAX Throttle", 
         //"address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
         "selected": null,
+        "bIgnore": true
     },
     "aiMaxThrottle1": {
         "displayValue": "AI MAX Throttle #1", 
         "address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
         "selected": null,
         "info": "item info",
-        "options": AI_MAX_THROTTLE_VALUES
+        "options": AI_MAX_THROTTLE_VALUES,
     },
     //PAL 21FC15D4  //NTSC 21FC2CB0
     "aiMaxThrottle2": {
@@ -334,6 +367,16 @@ const ADDRESSES = {
         "info": "item info",
         "options": AI_MAX_THROTTLE_VALUES
     },
+    
+    
+    //PAL 21FBFEF8  //NTSC 21FC15D4
+   /* "aiMaxThrottleAll": {
+        "displayValue": "ALL AI MAX Throttle", 
+        //"address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
+        "selected": null,
+        "bIgnore": true
+    },*/
+    
 };
 
 
@@ -452,6 +495,7 @@ function setOutput(){
     string += createCheatLine(_region, "cash", "Career Cash") ?? "";
     string += createCheatLine(_region, "tyreWear", "Tyre Wear Scale") ?? "";
     string += createCheatLine(_region, "gravity", "Gravity") ?? "";
+    string += createCheatLine(_region, "licenseTestCarWeight", "License Test Car Weight") ?? "";
 
 
     for(let i = 1; i <= 5; i++){
@@ -623,6 +667,32 @@ function createDropDown(selectedCheatsKey){
 
 }
 
+function createGroup(addresses){
+
+    //create drop downs ehre inside a group elem
+
+    const test = document.createElement("div");
+
+    
+}
+
+function renderDropDowns(){
+
+    for(const [key, value] of Object.entries(ADDRESSES)){
+
+        if(value.bIgnore) continue;
+        console.log(key);
+
+        /*if(Array.isArray(value)){
+            console.log("ASFDSAFSA");
+
+            createGroup(value);
+            continue;
+        }*/
+
+        createDropDown(key);
+    }
+}
 
 (() =>{
 
@@ -640,14 +710,15 @@ function createDropDown(selectedCheatsKey){
     const rubberbandGroup = document.querySelector("#rubberband-default");
     const rubberbandAll = document.querySelector("#rubberband-all");
 
+    renderDropDowns();
 
-    createDropDown("power");
+    /*createDropDown("power");
     createDropDown("cash");
     createDropDown("gravity");
     createDropDown("grip");
     createDropDown("drag");
     createDropDown("gearScale");
-    createDropDown("tyreWear");
+    createDropDown("tyreWear");*/
 
     /*createDropDown("aiRubberband1");
     createDropDown("aiRubberband2");
@@ -661,16 +732,7 @@ function createDropDown(selectedCheatsKey){
     createDropDown("aiMaxThrottle4");
     createDropDown("aiMaxThrottle5");*/
 
-    //setDropDown("#region", GAME_REGIONS, "region");
-    /*setDropDown("#power-multiplier", POWER_MULTIPLIERS, "power");
-    setDropDown("#gravity", GRAVITY_VALES, "gravity");
-    setDropDown("#grip", GRIP_VALUES, "grip");
-    setDropDown("#cash", CASH_VALUES, "cash");
-    setDropDown("#global-drag", DRAG_VALUES, "drag");
-    setDropDown("#gear-ratio", GEAR_VALUES, "gearScale");
-    setDropDown("#tyre-wear-scale", TYRE_WEAR_SCALE_VALUES, "tyreWear");*/
-
-    setDropDown("#rb-all", AI_RUBBERBAND_VALUES, "aiRubberbandAll");
+    /*setDropDown("#rb-all", AI_RUBBERBAND_VALUES, "aiRubberbandAll");
     setDropDown("#rb-1", AI_RUBBERBAND_VALUES, "aiRubberband1");
     setDropDown("#rb-2", AI_RUBBERBAND_VALUES, "aiRubberband2");
     setDropDown("#rb-3", AI_RUBBERBAND_VALUES, "aiRubberband3");
@@ -682,10 +744,10 @@ function createDropDown(selectedCheatsKey){
     setDropDown("#mf-2", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle2");
     setDropDown("#mf-3", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle3");
     setDropDown("#mf-4", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle4");
-    setDropDown("#mf-5", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle5");
+    setDropDown("#mf-5", AI_MAX_THROTTLE_VALUES, "aiMaxThrottle5");*/
 
-    createToggleGroupButton("#ai-throttle-group", "One value for all the AI Cars Max Throttle", "aiThrottleAsGroup", throttleGroup, throttleAll, setOutput);
-    createToggleGroupButton("#ai-rubberband-group", "One value for all the AI Cars Rubberband", "aiRubberbandAsGroup", rubberbandGroup, rubberbandAll, setOutput);
+   // createToggleGroupButton("#ai-throttle-group", "One value for all the AI Cars Max Throttle", "aiThrottleAsGroup", throttleGroup, throttleAll, setOutput);
+    //createToggleGroupButton("#ai-rubberband-group", "One value for all the AI Cars Rubberband", "aiRubberbandAsGroup", rubberbandGroup, rubberbandAll, setOutput);
 
     setOutput();
 
