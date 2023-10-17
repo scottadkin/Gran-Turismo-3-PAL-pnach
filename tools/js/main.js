@@ -76,15 +76,24 @@ const CASH_VALUES = [
 
 //default 0.1000000015
 const DRAG_VALUES = [//be4ccccd
-    {"displayValue": "-1000% 10 Times Negative", "value": "bf800000"},
-    {"displayValue": "-400% Quad Negative", "value": "becccccd"},
-    {"displayValue": "-200% Double Negative", "value": "be4ccccd"},
-    {"displayValue": "-100% Negative", "value": "bdcccccd"},
-    {"displayValue": "0%", "value": "00000000"},
-    {"displayValue": "100% Normal", "value": "3dcccccd"},
-    {"displayValue": "200% Double", "value": "3e4ccccd"},
-    {"displayValue": "400% Quad", "value": "3ecccccd"},
-    {"displayValue": "1000% 10 Times", "value": "3f800000"},
+
+    {"displayValue": "-10.0", "value": "c1200000"},
+    {"displayValue": "-9.0", "value": "c1100000"},
+    {"displayValue": "-8.0", "value": "c1000000"},
+    {"displayValue": "-7.0", "value": "c0e00000"},
+    {"displayValue": "-6.0", "value": "c0c00000"},
+    {"displayValue": "-5.0", "value": "c0a00000"},
+    {"displayValue": "-4.0", "value": "c0800000"},
+    {"displayValue": "-3.0", "value": "c0400000"},
+    {"displayValue": "-2.0", "value": "c0000000"},
+    {"displayValue": "-1.0", "value": "bf800000"},
+    {"displayValue": "0", "value": "00000000"},
+    {"displayValue": "Normal (0.1000000015)", "value": "3dcccccd"},
+    {"displayValue": "1", "value": "3f800000"},
+    {"displayValue": "2", "value": "40000000"},
+    {"displayValue": "3", "value": "40400000"},
+    {"displayValue": "4", "value": "40800000"},
+    {"displayValue": "5", "value": "40a00000"},
 ];
 
 const gearDefault = 0.001000000047;
@@ -244,9 +253,10 @@ const ADDRESSES = {
     //default value 0.1000000015
     "drag": {
         "displayValue": "Global Drag", 
-        "address": {"pal": "20351B70", "ntsc": null}, 
+        "address": {"pal": "20351B70", "ntsc": "203501E4"}, 
         "selected": null,
         "info": "Global drag force applied to all cars, if you use a negative value cars will speed up the faster they go until the game crashes, higher values make it harder to reach max speeds.",
+        "warning": "Don&apos;t go too crazy on maps with longer straights as the game will can crash if you are unlucky.",
         "options": DRAG_VALUES
     },
     //default value 0.001000000047 // PAL 20351d0c // NTSC 20350380
@@ -669,6 +679,8 @@ function createDropDown(selectedCheatsKey, parentElem){
     iContent.className = "form-info-content";
     iContent.innerHTML = cheat.info ?? "Missing info";
 
+
+
     const fItem = document.createElement("div");
     fItem.className = "form-item";
 
@@ -691,6 +703,14 @@ function createDropDown(selectedCheatsKey, parentElem){
     formInfo.appendChild(iHead);
     formInfo.appendChild(iContent);
     wrapper.appendChild(formInfo);
+    if(cheat.warning !== undefined){
+
+        const warn = document.createElement("div");
+        warn.className = "warning";
+        warn.innerHTML = cheat.warning;
+        wrapper.appendChild(warn);
+        
+    }
     wrapper.appendChild(fItem);
     parent.appendChild(wrapper);
 }
@@ -753,18 +773,6 @@ function addDropDownToGroup(parentElem, cheatKey, data){
     item.appendChild(selectBox);
 
     parent.appendChild(wrapper);
-    /**
-     <div class="form-row">
-        <div class="form-label">
-            AI Car #5 Rubberband value
-        </div>
-        <div class="form-item">
-            <select id="rb-5" defaultValue="411ccccd">
-                <option value="">-</option>
-            </select>
-        </div>
-    </div>
-     */
 }
 
 function renderDropDowns(){
