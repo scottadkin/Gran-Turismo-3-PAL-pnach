@@ -155,6 +155,24 @@ const WEIGHT_VALUES = [
     {"displayValue": "1KG", "value": "3f800000"},
 ];
 
+const TARGET_LAPS = [];
+
+for(let i = 1; i <= 200; i++){
+
+    let hex = i.toString(16);
+
+    const hLength = hex.length;
+
+    for(let x = 0; x < 8 - hLength; x++){
+
+        hex = `0${hex}`;
+    }
+
+    TARGET_LAPS.push({"displayValue": `${i} Lap${(i > 1) ? "s" : ""}`, "value": hex.toUpperCase()});
+}
+
+
+
 const AI_RUBBERBAND_VALUES = [];
 const AI_MAX_THROTTLE_VALUES = [];
 
@@ -184,7 +202,7 @@ function sortByDisplayValue(a, b){
 AI_RUBBERBAND_VALUES.sort(sortByDisplayValue);
 AI_MAX_THROTTLE_VALUES.sort(sortByDisplayValue);
 
-let _region = "pal";
+let _region = "ntsc";
 const _groups = {
     "aiThrottleAsGroup" : false,
     "aiRubberbandAsGroup" : false,
@@ -239,6 +257,14 @@ const ADDRESSES = {
         "info": "This affects all cars gear ratios, the lower the percentage the longer the gears will be, I recommened 80% or 90% if you use a power multiplier > 200%.",
         "options": GEAR_VALUES
     },
+    //doesn't effect HUD display
+    "targetLaps": {
+        "displayValue": "Single Race Target Laps", 
+        "address": {"pal": "", "ntsc": "01FCBB55"}, 
+        "selected": null,
+        "info": "Set the target amount of laps for races to this value(does not effect hud display, does not work in Championship races).",
+        "options": TARGET_LAPS,
+    },
     //default value 9.800000191, PAL 20351ED4 NTSC 20350544 //offset of 6544
     "gravity": {
         "displayValue": "Gravity",
@@ -249,13 +275,13 @@ const ADDRESSES = {
     },
 
     //default value -1.049999952
-    "wallThing":{
+   /* "wallThing":{
         "displayValue": "Wall Pushback",
         "address": {"pal": "20352054", "ntsc": ""}, 
         "selected": null,
         "info": "Force applied when hitting walls",
         "options": WALL_VALUES
-    },
+    },*/
 
     "licenseTestCarWeight":{
         "displayValue": "License Test Car Weight",
@@ -283,40 +309,43 @@ const ADDRESSES = {
         "displayValue": "AI Rubberband #1", 
         "address": {"pal": "21FC0460", "ntsc": "21FC0460"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_RUBBERBAND_VALUES
+        "info": "The higher the number the faster the AI will be.",
+        "warning": "Do not use if you want to do the license tests, it will crash the game on the NTSC version.",
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "ai_rubber",
+        "groupTitle": "AI Rubberband"
     },
     //PAL 21FC1B3C //NTSC 21FC1B3C
     "aiRubberband2": {
         "displayValue": "AI Rubberband #2", 
         "address": {"pal": "21FC1B3C", "ntsc": "21FC1B3C"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_RUBBERBAND_VALUES
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "ai_rubber"
     },
     //PAL 21FC3218 //NTSC 21FC48F4
     "aiRubberband3": {
         "displayValue": "AI Rubberband #3", 
         "address": {"pal": "21FC3218", "ntsc": "21FC3218"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_RUBBERBAND_VALUES
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "ai_rubber"
     },
     //PAL 21FC48F4 //NTSC 21FC5FD0
     "aiRubberband4": {
         "displayValue": "AI Rubberband #4", 
         "address": {"pal": "21FC48F4", "ntsc": "21FC48F4"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_RUBBERBAND_VALUES
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "ai_rubber"
     },
     //PAL 21FC5FD0 //NTSC 21FC3218
     "aiRubberband5": {
         "displayValue": "AI Rubberband #5", 
         "address": {"pal": "21FC5FD0", "ntsc": "21FC5FD0"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_RUBBERBAND_VALUES
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "ai_rubber"
     },
     
     
@@ -331,16 +360,19 @@ const ADDRESSES = {
         "displayValue": "AI MAX Throttle #1", 
         "address": {"pal": "21FBFEF8", "ntsc": "21FC15D4"}, 
         "selected": null,
-        "info": "item info",
+        "info": `In easier events the AI cars will not use 100&percnt; throttle to make it easier for the player, setting it to 100&percnt; stops this from happening.
+        You can also set it to more than 100&percnt; but it will not affect turbo cars.`,
         "options": AI_MAX_THROTTLE_VALUES,
+        "group": "ai_throttle",
+        "groupTitle": "AI Max Throttle"
     },
     //PAL 21FC15D4  //NTSC 21FC2CB0
     "aiMaxThrottle2": {
         "displayValue": "AI MAX Throttle #2", 
         "address": {"pal": "21FC15D4", "ntsc": "21FC2CB0"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_MAX_THROTTLE_VALUES
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "ai_throttle"
         
     },
     //PAL 21FC2CB0  //NTSC 21FC438C
@@ -348,24 +380,24 @@ const ADDRESSES = {
         "displayValue": "AI MAX Throttle #3", 
         "address": {"pal": "21FC2CB0", "ntsc": "21FC438C"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_MAX_THROTTLE_VALUES
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "ai_throttle"
     },
     //PAL 21FC438C  //NTSC 21FBFEF8
     "aiMaxThrottle4": {
         "displayValue": "AI MAX Throttle #4", 
         "address": {"pal": "21FC438C", "ntsc": "21FBFEF8"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_MAX_THROTTLE_VALUES
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "ai_throttle"
     }, 
     //PAL 21FC5A68  //NTSC 21FC5A68
     "aiMaxThrottle5": {
         "displayValue": "AI MAX Throttle #5", 
         "address": {"pal": "21FC5A68", "ntsc": "21FC5A68"}, 
         "selected": null,
-        "info": "item info",
-        "options": AI_MAX_THROTTLE_VALUES
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "ai_throttle"
     },
     
     
@@ -571,15 +603,54 @@ function createToggleGroupButton(parent, text, valueKey, groupElem, allElem, set
     parent.appendChild(wrapper);
 }
 
+function createSelectBox(cheatKey, cheat){
 
-function iDontKnowWhatToCallThis(){
+    const selectBox = document.createElement("select");
+    
+    //let selectOptions = `<option value="">-</option>`;
 
+    const defaultOption = document.createElement("option");
+    defaultOption.value = "";
+    defaultOption.innerHTML = "-";
+
+    selectBox.appendChild(defaultOption);
+
+    for(let i = 0; i < cheat.options.length; i++){
+
+        const o = cheat.options[i];
+
+        const elem = document.createElement("option");
+        elem.value = o.value;
+        elem.innerHTML = o.displayValue;
+
+        selectBox.appendChild(elem);
+
+        //selectOptions += `<option value="${o.value}">${o.displayValue}</option>`;
+    }
+
+    selectBox.addEventListener("change", (e) =>{
+
+        const selectedIndex = e.target.selectedIndex - 1;
+
+        if(selectedIndex < 0){
+            ADDRESSES[cheatKey].selected = null;      
+        }else{
+
+            ADDRESSES[cheatKey].selected = {
+                "displayValue": cheat.options[selectedIndex].displayValue, 
+                "value": e.target.value
+            };
+
+        }
+        setOutput();
+    }); 
+
+    return selectBox;
 }
 
-function createDropDown(selectedCheatsKey){
+function createDropDown(selectedCheatsKey, parentElem){
 
-    const parent = document.querySelector("#dummy");
-    console.log(ADDRESSES[selectedCheatsKey]);
+    const parent = document.querySelector(parentElem);
 
     const cheat = ADDRESSES[selectedCheatsKey];
 
@@ -601,7 +672,8 @@ function createDropDown(selectedCheatsKey){
     const fItem = document.createElement("div");
     fItem.className = "form-item";
 
-    const selectBox = document.createElement("select");
+    const selectBox = createSelectBox(selectedCheatsKey, cheat); 
+    /*const selectBox = document.createElement("select");
     
     let selectOptions = `<option value="">-</option>`;
 
@@ -612,7 +684,7 @@ function createDropDown(selectedCheatsKey){
         selectOptions += `<option value="${o.value}">${o.displayValue}</option>`;
     }
 
-    selectBox.innerHTML = selectOptions;
+    selectBox.innerHTML = selectOptions;*/
 
     fItem.appendChild(selectBox);
 
@@ -621,41 +693,94 @@ function createDropDown(selectedCheatsKey){
     wrapper.appendChild(formInfo);
     wrapper.appendChild(fItem);
     parent.appendChild(wrapper);
-
-    selectBox.addEventListener("change", (e) =>{
-
-        const selectedIndex = e.target.selectedIndex - 1;
-
-        if(selectedIndex < 0){
-            ADDRESSES[selectedCheatsKey].selected = null;      
-        }else{
-
-            ADDRESSES[selectedCheatsKey].selected = {
-                "displayValue": cheat.options[selectedIndex].displayValue, 
-                "value": e.target.value
-            };
-
-        }
-        setOutput();
-    }); 
-
 }
 
-function createGroup(addresses){
+function createGroup(cheat){
 
     //create drop downs ehre inside a group elem
 
-    const test = document.createElement("div");
+    const root = document.querySelector("#root");
+
+    const elem = document.createElement("div");
+
+    elem.id = cheat.group;
+    elem.className = "group-wrapper";
+
+    const header = document.createElement("div");
+    header.className = "group-header";
+    header.innerHTML = cheat.groupTitle ?? "Group title not set";
+    
+
+    const infoElem = document.createElement("div");
+    infoElem.className = "group-info";
+    infoElem.innerHTML = cheat.info;
+
+
+    elem.appendChild(header);
+    elem.appendChild(infoElem);
+
+    if(cheat.warning !== undefined){
+
+        const warning = document.createElement("div");
+        warning.className = "warning";
+        warning.innerHTML = cheat.warning;
+        elem.appendChild(warning);
+    }
 
     
+    root.appendChild(elem);  
+}
+
+function addDropDownToGroup(parentElem, cheatKey, data){
+
+    const parent = document.querySelector(parentElem);
+
+    const wrapper = document.createElement("div");
+    wrapper.className = "form-row";
+
+    const label = document.createElement("div");
+    label.className = "form-label";
+    label.innerText = JSON.parse(JSON.stringify(data.displayValue));
+
+    const item = document.createElement("div");
+    item.className = "form-item";
+
+    wrapper.appendChild(label);
+    wrapper.appendChild(item);
+
+
+    const selectBox = createSelectBox(cheatKey, data);
+    item.appendChild(selectBox);
+
+    parent.appendChild(wrapper);
+    /**
+     <div class="form-row">
+        <div class="form-label">
+            AI Car #5 Rubberband value
+        </div>
+        <div class="form-item">
+            <select id="rb-5" defaultValue="411ccccd">
+                <option value="">-</option>
+            </select>
+        </div>
+    </div>
+     */
 }
 
 function renderDropDowns(){
 
+
+    const createdGroups = [];
+
+    let i = 0;
+
     for(const [key, value] of Object.entries(ADDRESSES)){
 
+        i++;
+
         if(value.bIgnore) continue;
-        console.log(key);
+
+        let targetElem = "#dummy";
 
         /*if(Array.isArray(value)){
             console.log("ASFDSAFSA");
@@ -663,8 +788,26 @@ function renderDropDowns(){
             createGroup(value);
             continue;
         }*/
+        
 
-        createDropDown(key);
+ 
+
+        if(value.group !== undefined){
+
+            if(createdGroups.indexOf(value.group) === -1){
+                createdGroups.push(value.group);
+                createGroup(value);
+            }
+
+            targetElem = `#${value.group}`;
+            
+            addDropDownToGroup(targetElem, key, value);
+            continue;
+        }
+
+
+        //replace #dummy with group id if it exists
+        createDropDown(key, targetElem);
     }
 }
 
@@ -686,25 +829,6 @@ function renderDropDowns(){
 
     renderDropDowns();
 
-    /*createDropDown("power");
-    createDropDown("cash");
-    createDropDown("gravity");
-    createDropDown("grip");
-    createDropDown("drag");
-    createDropDown("gearScale");
-    createDropDown("tyreWear");*/
-
-    /*createDropDown("aiRubberband1");
-    createDropDown("aiRubberband2");
-    createDropDown("aiRubberband3");
-    createDropDown("aiRubberband4");
-    createDropDown("aiRubberband5");
-
-    createDropDown("aiMaxThrottle1");
-    createDropDown("aiMaxThrottle2");
-    createDropDown("aiMaxThrottle3");
-    createDropDown("aiMaxThrottle4");
-    createDropDown("aiMaxThrottle5");*/
 
     /*setDropDown("#rb-all", AI_RUBBERBAND_VALUES, "aiRubberbandAll");
     setDropDown("#rb-1", AI_RUBBERBAND_VALUES, "aiRubberband1");
