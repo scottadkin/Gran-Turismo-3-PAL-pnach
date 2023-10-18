@@ -67,7 +67,16 @@ const POWER_MULTIPLIERS = [
     {"displayValue": "100 Times Power", "value": "44750000"},
     {"displayValue": "250 Times Power", "value": "45192000"},
     {"displayValue": "420 Times Power", "value": "4580a000"},
+    {"displayValue": "500 Times Power", "value": "45992000"},
+    {"displayValue": "1000 Times Power", "value": "46192000"},
     {"displayValue": "1337 Times Power", "value": "464cba67"},
+    {"displayValue": "2000 Times Power", "value": "46992000"},
+    {"displayValue": "3000 Times Power", "value": "46e5b000"},
+    {"displayValue": "4000 Times Power", "value": "47192000"},
+    {"displayValue": "5000 Times Power", "value": "473f6800"},
+    {"displayValue": "10000 Times Power", "value": "47bf6800"},
+    {"displayValue": "100000 Times Power", "value": "496f4200"},
+    {"displayValue": "1000000 Times Power", "value": "4b158940"},
 ];
 
 const CASH_VALUES = [
@@ -83,9 +92,13 @@ const DRAG_VALUES = [//be4ccccd
     {"displayValue": "-7.0", "value": "c0e00000"},
     {"displayValue": "-6.0", "value": "c0c00000"},
     {"displayValue": "-5.0", "value": "c0a00000"},
+    {"displayValue": "-4.5", "value": "c0900000"},
     {"displayValue": "-4.0", "value": "c0800000"},
+    {"displayValue": "-3.5", "value": "c0600000"},
     {"displayValue": "-3.0", "value": "c0400000"},
+    {"displayValue": "-2.5", "value": "c0200000"},
     {"displayValue": "-2.0", "value": "c0000000"},
+    {"displayValue": "-1.5", "value": "3e19999a"},
     {"displayValue": "-1.0", "value": "bf800000"},
     {"displayValue": "0", "value": "00000000"},
     {"displayValue": "Normal (0.1000000015)", "value": "3dcccccd"},
@@ -106,6 +119,8 @@ const GEAR_VALUES = [//be4ccccd
     {"displayValue": `70%`, "value": "3a378035"},
     {"displayValue": `60%`, "value": "3a1d4952"},
     {"displayValue": "50%", "value": "3a03126f"},
+    {"displayValue": "40%", "value": "39d1b718"},
+    {"displayValue": "30%", "value": "399d4952"},
     {"displayValue": "25%", "value": "3983126f"},
     {"displayValue": "10%", "value": "38d1b717"},
 ];
@@ -148,7 +163,17 @@ const GRIP_VALUES = [
     {"displayValue": "200%", "value": "3b03126f"},//
     {"displayValue": "300%", "value": "3b449ba6"},//
     {"displayValue": "400%", "value": "3b83126f"},//
-    {"displayValue": "500%", "value": "3ba3d70b"},//
+    {"displayValue": "500%", "value": "3ba3d70b"},//3bc49ba6
+    {"displayValue": "600%", "value": "3bc49ba6"},//
+    {"displayValue": "700%", "value": "3be56042"},//
+    {"displayValue": "800%", "value": "3c03126f"},//
+    {"displayValue": "900%", "value": "3c1374bd"},//
+    {"displayValue": "1000%", "value": "3c23d70b"},//
+    {"displayValue": "2000%", "value": "3ca3d70b"},//
+    {"displayValue": "3000%", "value": "3cf5c290"},//
+    {"displayValue": "4000%", "value": "3d23d70b"},//
+    {"displayValue": "5000%", "value": "3d4ccccd"},//
+    {"displayValue": "10000%", "value": "3dcccccd"},//
 
     //
 ];
@@ -256,7 +281,7 @@ const ADDRESSES = {
         "address": {"pal": "20351B70", "ntsc": "203501E4"}, 
         "selected": null,
         "info": "Global drag force applied to all cars, if you use a negative value cars will speed up the faster they go until the game crashes, higher values make it harder to reach max speeds.",
-        "warning": "Don&apos;t go too crazy on maps with longer straights as the game will can crash if you are unlucky.",
+        "warning": "Don&apos;t go too crazy on maps with longer straights as the game will crash if you are unlucky.",
         "options": DRAG_VALUES
     },
     //default value 0.001000000047 // PAL 20351d0c // NTSC 20350380
