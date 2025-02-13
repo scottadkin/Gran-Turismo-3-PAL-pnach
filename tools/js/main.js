@@ -20,6 +20,12 @@ const FLOAT_VALUES = {
     1.5:"3fc00000",
     1.75: "3fe00000",
     2: "40000000",
+    2.5: "40200000",
+    3: "40400000",
+    3.5: "40600000",
+    4: "40800000",
+    4.5: "40900000",
+    5: "40a00000",
 };
 
 //default power value as a float 9.800000191
@@ -433,6 +439,101 @@ const ADDRESSES = {
         "selected": null,
         "options": AI_MAX_THROTTLE_VALUES,
         "group": "ai_throttle"
+    },
+    "arcadeAiRubberband1": {
+        "displayValue": "AI Rubberband #1", 
+        "address": {"pal": "", "ntsc": "21FBE340"}, 
+        "selected": null,
+        "info": "The higher the number the faster the AI will be.",
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "arcade_ai_rubber",
+        "groupTitle": "Arcade AI Rubberband"
+    },
+    "arcadeAiRubberband2": {
+        "displayValue": "AI Rubberband #2", 
+        "address": {"pal": "", "ntsc": "21FBFA1C"}, 
+        "selected": null,
+        "info": "The higher the number the faster the AI will be.",
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "arcade_ai_rubber",
+        "groupTitle": "Arcade AI Rubberband"
+    },
+    "arcadeAiRubberband3": {
+        "displayValue": "AI Rubberband #3", 
+        "address": {"pal": "", "ntsc": "21FC10F8"}, 
+        "selected": null,
+        "info": "The higher the number the faster the AI will be.",
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "arcade_ai_rubber",
+        "groupTitle": "Arcade AI Rubberband"
+    },
+    "arcadeAiRubberband4": {
+        "displayValue": "AI Rubberband #4", 
+        "address": {"pal": "", "ntsc": "21FC27D4"}, 
+        "selected": null,
+        "info": "The higher the number the faster the AI will be.",
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "arcade_ai_rubber",
+        "groupTitle": "Arcade AI Rubberband"
+    },
+    "arcadeAiRubberband5": {
+        "displayValue": "AI Rubberband #5", 
+        "address": {"pal": "", "ntsc": "21FC3EB0"}, 
+        "selected": null,
+        "info": "The higher the number the faster the AI will be.",
+        "options": AI_RUBBERBAND_VALUES,
+        "group": "arcade_ai_rubber",
+        "groupTitle": "Arcade AI Rubberband"
+    },
+    "arcadeAiMaxThrottle1": {
+        "displayValue": "AI MAX Throttle #1", 
+        "address": {"pal": "", "ntsc": "21FBDDD8"}, 
+        "selected": null,
+        "info": `In easier events the AI cars will not use 100&percnt; throttle to make it easier for the player, setting it to 100&percnt; stops this from happening.
+        You can also set it to more than 100&percnt; but it will not affect turbo cars.`,
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "arcade_ai_throttle",
+        "groupTitle": "Arcade AI Max Throttle"
+    },
+    "arcadeAiMaxThrottle2": {
+        "displayValue": "AI MAX Throttle #2", 
+        "address": {"pal": "", "ntsc": "21FBF4B4"}, 
+        "selected": null,
+        "info": `In easier events the AI cars will not use 100&percnt; throttle to make it easier for the player, setting it to 100&percnt; stops this from happening.
+        You can also set it to more than 100&percnt; but it will not affect turbo cars.`,
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "arcade_ai_throttle",
+        "groupTitle": "Arcade AI Max Throttle"
+    },
+    "arcadeAiMaxThrottle3": {
+        "displayValue": "AI MAX Throttle #3", 
+        "address": {"pal": "", "ntsc": "21FC0B90"}, 
+        "selected": null,
+        "info": `In easier events the AI cars will not use 100&percnt; throttle to make it easier for the player, setting it to 100&percnt; stops this from happening.
+        You can also set it to more than 100&percnt; but it will not affect turbo cars.`,
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "arcade_ai_throttle",
+        "groupTitle": "Arcade AI Max Throttle"
+    },
+    "arcadeAiMaxThrottle4": {
+        "displayValue": "AI MAX Throttle #4", 
+        "address": {"pal": "", "ntsc": "21FC226C"}, 
+        "selected": null,
+        "info": `In easier events the AI cars will not use 100&percnt; throttle to make it easier for the player, setting it to 100&percnt; stops this from happening.
+        You can also set it to more than 100&percnt; but it will not affect turbo cars.`,
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "arcade_ai_throttle",
+        "groupTitle": "Arcade AI Max Throttle"
+    },
+    "arcadeAiMaxThrottle5": {
+        "displayValue": "AI MAX Throttle #5", 
+        "address": {"pal": "", "ntsc": "21FC3948"}, 
+        "selected": null,
+        "info": `In easier events the AI cars will not use 100&percnt; throttle to make it easier for the player, setting it to 100&percnt; stops this from happening.
+        You can also set it to more than 100&percnt; but it will not affect turbo cars.`,
+        "options": AI_MAX_THROTTLE_VALUES,
+        "group": "arcade_ai_throttle",
+        "groupTitle": "Arcade AI Max Throttle"
     },
     
     
